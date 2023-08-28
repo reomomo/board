@@ -2,22 +2,44 @@
 
 <% if @user.vote_answers.find_by(vote_id: @vote.id).present? %>
   <p>回答済</p>
+  <h4>タイトル</h4>
+  <%= @vote.title %>
+
+  <h4>質問（2～200文字）</h4>
+  <%= @vote.question %>
+  <h4>選択肢（1～50文字）</h4>
+  <%= @vote.choice_1 %>
+  <%= @vote.choice_2 %>
+  <%= @vote.choice_3 %>
+  <%= @vote.choice_4 %>
+
+  <h4><%= @user.last_name %>さんの回答</h4>
+
+  <%= @user.vote_answers.find_by(vote_id: @vote.id).answer %>
+  <!--.find_by(vote_id: @vote.id)-->
+
 <% else %>
-   <p>未回答</p>
-<% end %>
-<%= flash[:notice] %>
+  <p>未回答</p>
 
-<h4>タイトル</h4>
-<%= @vote.title %>
+  <%= flash[:notice] %>
 
-<h4>質問（2～200文字）</h4>
-<%= @vote.question %>
-<h4>選択肢（1～50文字）</h4>
-<%= form_with model: @vote_answer do |f| %>
-<%= f.radio_button :answer, @vote.choice %>
-<%= @vote.choice_1 %>
-<%= @vote.choice_2 %>
-<%= @vote.choice_3 %>
-<%= @vote.choice_4 %>
+  <h4>タイトル</h4>
+  <%= @vote.title %>
+
+  <h4>質問（2～200文字）</h4>
+  <%= @vote.question %>
+  <h4>選択肢（1～50文字）</h4>
+  <%= form_with model: @vote_answer do |f| %>
+    <%= f.radio_button :answer, @vote.choice_1 %>
+    <%= label :answer, @vote.choice_1, value: :choice_1 %>
+    <%= f.radio_button :answer, @vote.choice_2 %>
+    <%= label :answer, @vote.choice_2, value: :choice_2 %>
+    <%= f.radio_button :answer, @vote.choice_3 %>
+    <%= label :answer, @vote.choice_3, value: :choice_3 %>
+    <%= f.radio_button :answer, @vote.choice_4 %>
+    <%= label :answer, @vote.choice_4, value: :choice_4 %>
+    <%= f.hidden_field :vote_id, :value => @vote.id %>
+    <%= f.submit "回答する" %>
+  <% end %>
 
 <% end %>

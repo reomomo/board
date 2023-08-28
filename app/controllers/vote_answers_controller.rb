@@ -10,4 +10,9 @@ class VoteAnswersController < ApplicationController
       redirect_to vote_path(@vote_answer.vote.id)
     end
   end
+
+  private
+  def vote_answer_params
+    params.require(:vote_answer).permit(:user_id, :vote_id, :answer, :email)
+  end
 end
