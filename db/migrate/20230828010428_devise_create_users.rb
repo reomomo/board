@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :encrypted_password, null: false, default: ""
       t.string :last_name, null: false
       t.string :first_name, null: false
-      t.string :keyword, default: "Management association"
+      t.string :keyword, inclusion: { in: ["Management association"] }
 
       ## Recoverable
       t.string   :reset_password_token

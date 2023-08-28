@@ -1,2 +1,23 @@
 <h1>Votes#show</h1>
-<p>Find me in app/views/votes/show.html.erb</p>
+
+<% if @user.vote_answers.find_by(vote_id: @vote.id).present? %>
+  <p>回答済</p>
+<% else %>
+   <p>未回答</p>
+<% end %>
+<%= flash[:notice] %>
+
+<h4>タイトル</h4>
+<%= @vote.title %>
+
+<h4>質問（2～200文字）</h4>
+<%= @vote.question %>
+<h4>選択肢（1～50文字）</h4>
+<%= form_with model: @vote_answer do |f| %>
+<%= f.radio_button :answer, @vote.choice %>
+<%= @vote.choice_1 %>
+<%= @vote.choice_2 %>
+<%= @vote.choice_3 %>
+<%= @vote.choice_4 %>
+
+<% end %>

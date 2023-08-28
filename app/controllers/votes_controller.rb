@@ -5,6 +5,7 @@ class VotesController < ApplicationController
 
   def create
     @vote = Vote.new(vote_params)
+    @vote.user_id = current_user.id
     if @vote.save
       redirect_to vote_path(@vote.id)
     else
@@ -13,6 +14,9 @@ class VotesController < ApplicationController
   end
 
   def show
+    @vote = Vote.find(params[:id])
+    @user = current_user
+    @vote_answer = VoteAnswer.new
   end
 
   def index
@@ -27,6 +31,6 @@ class VotesController < ApplicationController
   private
 
   def vote_params
-    params.require(:vote).permit(:title, :question, :choice)
+    params.require(:vote).permit(:user_id, :title, :question, :choice_1, :choice_2, :choice_3, :choice_4)
   end
 end

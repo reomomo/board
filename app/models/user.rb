@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :votes, dependent: :destroy
+  has_many :vote_answers # 集計結果が変わってしまう為、dependent: :destroyはしない
 
 end
