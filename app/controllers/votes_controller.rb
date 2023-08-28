@@ -17,6 +17,7 @@ class VotesController < ApplicationController
     @vote = Vote.find(params[:id])
     @user = current_user
     @vote_answer = VoteAnswer.new
+    @vote_answers = @vote.vote_answers.find_by(vote_id: @vote.id)
   end
 
   def index

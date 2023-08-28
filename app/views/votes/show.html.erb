@@ -16,7 +16,14 @@
   <h4><%= @user.last_name %>さんの回答</h4>
 
   <%= @user.vote_answers.find_by(vote_id: @vote.id).answer %>
-  <!--.find_by(vote_id: @vote.id)-->
+
+  <p id="notice"><%= notice %></p>
+  <h4>集計結果</h4>
+
+  <%= @vote_answers.answer %>
+  <!--bar_chart Vote.group(:choice_1).sum(@vote_answers.answer)-->
+
+
 
 <% else %>
   <p>未回答</p>
