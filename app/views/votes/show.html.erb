@@ -12,6 +12,8 @@
 
 <% if @user.vote_answers.find_by(vote_id: @vote.id).present? %>
   <h1>アンケートのご協力ありがとうございます。</h1>
+
+  <h4>回答状況</h4>
   <p>回答済</p>
   <h4>タイトル</h4>
   <%= @vote.title %>
@@ -27,8 +29,52 @@
   <h4><%= @user.last_name %>さんの回答</h4>
   <%= @user.vote_answers.find_by(vote_id: @vote.id).answer %>
 
+  <h4>現在の集計状況</h4>
+  <table>
+    <tr>
+      <th class="total"><%= @vote.choice_1 %> :</th>
+      <td class="total"><%= @answer_1 %></td>
+      <td><div class="graph" id="graph_1"></div></td>
+    </tr>
+    <tr>
+      <th class="total"><%= @vote.choice_2 %> :</th>
+      <td class="total"><%= @answer_2 %></td>
+      <td><div class="graph" id="graph_2"></div></td>
+    </tr>
+    <tr>
+      <th class="total"><%= @vote.choice_3 %> :</th>
+      <td class="total"><%= @answer_3 %></td>
+      <td><div class="graph" id="graph_3"></div></td>
+    </tr>
+    <tr>
+      <th class="total"><%= @vote.choice_4 %> :</th>
+      <td class="total"><%= @answer_4 %></td>
+      <td><div class="graph" id="graph_4"></div></td>
+    </tr>
+  </table>
+  <script>
+    const graph_1 = document.getElementById("graph_1");
+    const graph_2 = document.getElementById("graph_2");
+    const graph_3 = document.getElementById("graph_3");
+    const graph_4 = document.getElementById("graph_4");
+    const answer_1 = <%= @answer_1 %>
+    const answer_2 = <%= @answer_2 %>
+    const answer_3 = <%= @answer_3 %>
+    const answer_4 = <%= @answer_4 %>
+    graph_1.style.backgroundColor = "#33FFFF";
+    graph_1.style.width = answer_1 * 20 + "px";
+    graph_2.style.backgroundColor = "#33FFFF";
+    graph_2.style.width = answer_2 * 20 + "px";
+    graph_3.style.backgroundColor = "#33FFFF";
+    graph_3.style.width = answer_3 * 20 + "px";
+    graph_4.style.backgroundColor = "#33FFFF";
+    graph_4.style.width = answer_4 * 20 + "px";
+  </script>
+
 <% else %>
   <h1>アンケートにご協力ください。</h1>
+
+  <h4>回答状況</h4>
   <p>未回答</p>
 
   <%= flash[:vote_notice] %>
@@ -51,39 +97,51 @@
     <%= f.hidden_field :vote_id, :value => @vote.id %>
     <%= f.submit "回答する" %>
   <% end %>
+  <a href="javascript:onClick()">現在の集計状況を見る</a>
+  <table id="table">
+    <tr>
+      <th class="total"><%= @vote.choice_1 %> :</th>
+      <td class="total"><%= @answer_1 %></td>
+      <td><div class="graph" id="graph_1"></div></td>
+    </tr>
+    <tr>
+      <th class="total"><%= @vote.choice_2 %> :</th>
+      <td class="total"><%= @answer_2 %></td>
+      <td><div class="graph" id="graph_2"></div></td>
+    </tr>
+    <tr>
+      <th class="total"><%= @vote.choice_3 %> :</th>
+      <td class="total"><%= @answer_3 %></td>
+      <td><div class="graph" id="graph_3"></div></td>
+    </tr>
+    <tr>
+      <th class="total"><%= @vote.choice_4 %> :</th>
+      <td class="total"><%= @answer_4 %></td>
+      <td><div class="graph" id="graph_4"></div></td>
+    </tr>
+  </table>
+  <script>
+    function onClick() {
+      const table = document.getElementById("table");
+      const graph_1 = document.getElementById("graph_1");
+      const graph_2 = document.getElementById("graph_2");
+      const graph_3 = document.getElementById("graph_3");
+      const graph_4 = document.getElementById("graph_4");
+      const answer_1 = <%= @answer_1 %>
+      const answer_2 = <%= @answer_2 %>
+      const answer_3 = <%= @answer_3 %>
+      const answer_4 = <%= @answer_4 %>
+      table.style.visibility = "visible";
+      graph_1.style.backgroundColor = "#33FFFF";
+      graph_1.style.width = answer_1 * 20 + "px";
+      graph_2.style.backgroundColor = "#33FFFF";
+      graph_2.style.width = answer_2 * 20 + "px";
+      graph_3.style.backgroundColor = "#33FFFF";
+      graph_3.style.width = answer_3 * 20 + "px";
+      graph_4.style.backgroundColor = "#33FFFF";
+      graph_4.style.width = answer_4 * 20 + "px";
+    }
+  </script>
 <% end %>
 
 
-<a href="javascript:onClick()">現在の集計状況を見る</a>
-<table id="table">
-  <tr>
-    <th class="total"><%= @vote.choice_1 %> :</th>
-    <td class="total"><%= @answer_1 %></td>
-    <td><div class="graph" id="graph_1"></div></td>
-  </tr>
-  <tr>
-    <th class="total"><%= @vote.choice_2 %> :</th>
-    <td class="total"><%= @answer_2 %></td>
-    <td><div class="graph"></div></td>
-  </tr>
-  <tr>
-    <th class="total"><%= @vote.choice_3 %> :</th>
-    <td class="total"><%= @answer_3 %></td>
-    <td><div class="graph"></div></td>
-  </tr>
-  <tr>
-    <th class="total"><%= @vote.choice_4 %> :</th>
-    <td class="total"><%= @answer_4 %></td>
-    <td><div class="graph"></div></td>
-  </tr>
-</table>
-<script>
-  function onClick() {
-    const table = document.getElementById("table");
-    const graph_1 = document.getElementById("graph_1");
-    const answer_1 = <%= @answer_1 %>
-    table.style.visibility = "visible";
-    graph_1.style.backgroundColor = "#33FFFF";
-    graph_1.style.width = answer_1 * 20 + "px";
-  }
-</script>
