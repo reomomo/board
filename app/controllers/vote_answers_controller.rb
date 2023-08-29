@@ -6,7 +6,7 @@ class VoteAnswersController < ApplicationController
     if @vote_answer.save
       redirect_to vote_path(@vote_answer.vote.id)
     else
-      flash[:notice] = "回答を選択後、再度登録してください"
+      flash[:vote_notice] = "回答を選択後、再度登録してください"
       redirect_to vote_path(@vote_answer.vote.id)
     end
   end

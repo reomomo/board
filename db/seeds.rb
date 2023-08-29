@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(
+user = User.create!(
   [
     {
       email: 'taro@example.com',
@@ -14,6 +14,58 @@ User.create!(
       first_name: '太郎',
       keyword: 'Management association',
       password: 'password',
+    }, {
+      email: 'jiro@example.com',
+      last_name: '掲示',
+      first_name: '次郎',
+      keyword: 'Management association',
+      password: 'password',
+    }, {
+      email: 'hanako@example.com',
+      last_name: 'あん',
+      first_name: '花子',
+      keyword: 'Management association',
+      password: 'password',
+    }, {
+      email: 'ai@example.com',
+      last_name: 'けと',
+      first_name: '愛',
+      keyword: 'Management association',
+      password: 'password',
+    }, {
+      email: 'ban@example.com',
+      last_name: 'けいじ',
+      first_name: 'ばん',
+      keyword: 'Management association',
+      password: 'password',
+    }, {
+      email: 'an@example.com',
+      last_name: 'ばん',
+      first_name: 'あん',
+      keyword: 'Management association',
+      password: 'password',
+    }
+  ]
+)
+
+Vote.create!(
+  [
+    {
+      user_id: 2,
+      title: '会議室が使用できなくなりました',
+      question: '会議時間の変更をお願いします。参加可能日を選択してください。',
+      choice_1: '9/2 10:00',
+      choice_2: '9/2 15:00',
+      choice_3: '9/3 10:00',
+      choice_4: '9/3 15:00',
+    },{
+      user_id: 5,
+      title: 'ハロウィンイベント',
+      question: 'ハロウィンイベント用に子供たちにお菓子を用意したいと思います。予算をどのぐらいで設定しますか？',
+      choice_1: '500円',
+      choice_2: '400円',
+      choice_3: '300円',
+      choice_4: 'それ以下',
     }
   ]
 )

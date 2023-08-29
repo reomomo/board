@@ -8,9 +8,9 @@
   <h4>質問（2～200文字）</h4>
   <%= @vote.question %>
   <h4>選択肢（1～50文字）</h4>
-  <%= @vote.choice_1 %>
-  <%= @vote.choice_2 %>
-  <%= @vote.choice_3 %>
+  <%= @vote.choice_1 %></br>
+  <%= @vote.choice_2 %></br>
+  <%= @vote.choice_3 %></br>
   <%= @vote.choice_4 %>
 
   <h4><%= @user.last_name %>さんの回答</h4>
@@ -21,14 +21,27 @@
   <h4>集計結果</h4>
 
   <%= @vote_answers.answer %>
-  <!--bar_chart Vote.group(:choice_1).sum(@vote_answers.answer)-->
-
+ <% @answers.each do |e| %>
+  <% if e.answer == @vote.choice_1 %>
+   <% e.answer = answer_1 %>
+  <% end %>
+ <% end %>
+  <!--Book.all.sum(:price)-->
+  <% answer_sum = 3 %>
+  <% if @vote.answer_1.present? %>
+  <%= bar_chart Vote.group(:choice_1).sum(:answer_1) %>
+  <%= pie_chart VoteAnswer.group(:answer_1).count %>
+  <% end %>
+  <% if @vote.answer_4.present? %>
+  <%= bar_chart Vote.group(:choice_4).sum(:answer_4) %>
+  <%= pie_chart Vote.group(:answer_4).count %>
+  <% end %>
 
 
 <% else %>
   <p>未回答</p>
 
-  <%= flash[:notice] %>
+  <%= flash[:vote_notice] %>
 
   <h4>タイトル</h4>
   <%= @vote.title %>
@@ -38,11 +51,11 @@
   <h4>選択肢（1～50文字）</h4>
   <%= form_with model: @vote_answer do |f| %>
     <%= f.radio_button :answer, @vote.choice_1 %>
-    <%= label :answer, @vote.choice_1, value: :choice_1 %>
+    <%= label :answer, @vote.choice_1, value: :choice_1 %></br>
     <%= f.radio_button :answer, @vote.choice_2 %>
-    <%= label :answer, @vote.choice_2, value: :choice_2 %>
+    <%= label :answer, @vote.choice_2, value: :choice_2 %></br>
     <%= f.radio_button :answer, @vote.choice_3 %>
-    <%= label :answer, @vote.choice_3, value: :choice_3 %>
+    <%= label :answer, @vote.choice_3, value: :choice_3 %></br>
     <%= f.radio_button :answer, @vote.choice_4 %>
     <%= label :answer, @vote.choice_4, value: :choice_4 %>
     <%= f.hidden_field :vote_id, :value => @vote.id %>
