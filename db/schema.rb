@@ -30,8 +30,7 @@ ActiveRecord::Schema.define(version: 2023_08_28_064000) do
   create_table "vote_answers", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "vote_id", null: false
-    t.string "choice", null: false
-    t.integer "answer", null: false
+    t.string "answer", null: false
     t.string "email", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

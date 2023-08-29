@@ -1,13 +1,5 @@
-<h1>Votes#show</h1>
-<% @answer_1 = 0 %>
-<% @answer_2 = 0 %>
-<% @answer_3 = 0 %>
-<% @answer_4 = 0 %>
-
 <% @answers.each do |e| %>
-<%= e.choice %>
-<%= @vote.choice_1 %>
-  <% if e.choice == @vote.choice_1 %>
+  <% if e.answer == @vote.choice_1 %>
     <% @answer_1 += 1 %>
   <% elsif e.answer == @vote.choice_2 %>
     <% @answer_2 += 1 %>
@@ -17,7 +9,9 @@
     <% @answer_4 += 1 %>
   <% end %>
 <% end %>
+
 <% if @user.vote_answers.find_by(vote_id: @vote.id).present? %>
+  <h1>アンケートのご協力ありがとうございます。</h1>
   <p>回答済</p>
   <h4>タイトル</h4>
   <%= @vote.title %>
@@ -31,50 +25,10 @@
   <%= @vote.choice_4 %>
 
   <h4><%= @user.last_name %>さんの回答</h4>
-
-  <%= @user.vote_answers.find_by(vote_id: @vote.id).choice %>
-
-  <p id="notice"><%= notice %></p>
-  <a href="javascript:onClick()">現在の集計状況を見る</a>
-  <table>
-    <tr>
-      <th class="total" id="text"><%= @vote.choice_1 %> :</th>
-      <td class="total" id="total"><%= @answer_1 %></td>
-      <td><div class="graph" id="graph_1"></div></td>
-    </tr>
-    <tr>
-      <th class="total" id="text"><%= @vote.choice_2 %> :</th>
-      <td><%= @answer_2 %></td>
-      <td><div class="graph" id="graph_2"></div></td>
-    </tr>
-    <tr>
-      <th><%= @vote.choice_3 %> :</th>
-      <td><%= @answer_3 %></td>
-      <td><div class="graph" id="graph_3"></div></td>
-    </tr>
-    <tr>
-      <th><%= @vote.choice_4 %> :</th>
-      <td><%= @answer_4 %></td>
-      <td><div class="graph" id="graph_4"></div></td>
-    </tr>
-  </table>
-  <script>
-
-
-  function onClick() {
-    const graph_1 = document.getElementById("graph_1");
-    const text = document.getElementById("text");
-    const total = document.getElementById("total");
-    let answer_1 = <%= @answer_1 %>;
-    graph_1.style.backgroundColor = "#33FFFF";
-    graph_1.style.width = answer_1 * 20 + "px";
-    text.style.visibility = "visible";
-    total.style.visibility = "visible";
-  }
-  </script>
-
+  <%= @user.vote_answers.find_by(vote_id: @vote.id).answer %>
 
 <% else %>
+  <h1>アンケートにご協力ください。</h1>
   <p>未回答</p>
 
   <%= flash[:vote_notice] %>
@@ -86,56 +40,50 @@
   <%= @vote.question %>
   <h4>選択肢（1～50文字）</h4>
   <%= form_with model: @vote_answer do |f| %>
-    <%= f.radio_button :choice, :choice_1 %>
-    <%= label :choice, @vote.choice_1, value: :choice_1 %></br>
-    <%= f.radio_button :choice, :choice_2 %>
-    <%= label :choice, @vote.choice_2, value: :choice_2 %></br>
-    <%= f.radio_button :choice, :choice_3 %>
-    <%= label :choice, @vote.choice_3, value: :choice_3 %></br>
-    <%= f.radio_button :choice, :choice_4 %>
-    <%= label :choice, @vote.choice_4, value: :choice_4 %>
+    <%= f.radio_button :answer, :choice_1 %>
+    <%= f.label :answer, @vote.choice_1, value: :choice_1 %></br>
+    <%= f.radio_button :answer, :choice_2 %>
+    <%= f.label :answer, @vote.choice_2, value: :choice_2 %></br>
+    <%= f.radio_button :answer, :choice_3 %>
+    <%= f.label :answer, @vote.choice_3, value: :choice_3 %></br>
+    <%= f.radio_button :answer, :choice_4 %>
+    <%= f.label :answer, @vote.choice_4, value: :choice_4 %>
     <%= f.hidden_field :vote_id, :value => @vote.id %>
     <%= f.submit "回答する" %>
   <% end %>
+<% end %>
 
 
-
-
-  <a href="javascript:onClick()">現在の集計状況を見る</a>
-  <table>
-    <tr>
-      <th class="total" id="text"><%= @vote.choice_1 %> :</th>
-      <td class="total" id="total"><%= @answer_1 %></td>
-      <td><div class="graph" id="graph_1"></div></td>
-    </tr>
-    <tr>
-      <th class="total" id="text"><%= @vote.choice_2 %> :</th>
-      <td><%= @answer_2 %></td>
-      <td><div class="graph" id="graph_2"></div></td>
-    </tr>
-    <tr>
-      <th><%= @vote.choice_3 %> :</th>
-      <td><%= @answer_3 %></td>
-      <td><div class="graph" id="graph_3"></div></td>
-    </tr>
-    <tr>
-      <th><%= @vote.choice_4 %> :</th>
-      <td><%= @answer_4 %></td>
-      <td><div class="graph" id="graph_4"></div></td>
-    </tr>
-  </table>
-  <script>
-
-
+<a href="javascript:onClick()">現在の集計状況を見る</a>
+<table id="table">
+  <tr>
+    <th class="total"><%= @vote.choice_1 %> :</th>
+    <td class="total"><%= @answer_1 %></td>
+    <td><div class="graph" id="graph_1"></div></td>
+  </tr>
+  <tr>
+    <th class="total"><%= @vote.choice_2 %> :</th>
+    <td class="total"><%= @answer_2 %></td>
+    <td><div class="graph"></div></td>
+  </tr>
+  <tr>
+    <th class="total"><%= @vote.choice_3 %> :</th>
+    <td class="total"><%= @answer_3 %></td>
+    <td><div class="graph"></div></td>
+  </tr>
+  <tr>
+    <th class="total"><%= @vote.choice_4 %> :</th>
+    <td class="total"><%= @answer_4 %></td>
+    <td><div class="graph"></div></td>
+  </tr>
+</table>
+<script>
   function onClick() {
+    const table = document.getElementById("table");
     const graph_1 = document.getElementById("graph_1");
-    const text = document.getElementById("text");
-    const total = document.getElementById("total");
-    let answer_1 = <%= @answer_1 %>;
+    const answer_1 = <%= @answer_1 %>
+    table.style.visibility = "visible";
     graph_1.style.backgroundColor = "#33FFFF";
     graph_1.style.width = answer_1 * 20 + "px";
-    text.style.visibility = "visible";
-    total.style.visibility = "visible";
   }
-  </script>
-<% end %>
+</script>

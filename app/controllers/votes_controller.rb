@@ -18,7 +18,23 @@ class VotesController < ApplicationController
     @user = current_user
     @vote_answer = VoteAnswer.new
     @vote_answers = @vote.vote_answers.find_by(vote_id: @vote.id, user_id: current_user.id)
-    @answers = VoteAnswer.where(vote_id: 1)
+    @answers = VoteAnswer.where(vote_id: @vote.id)
+    @answer_1 = 0
+    @answer_2 = 0
+    @answer_3 = 0
+    @answer_4 = 0
+
+    # @answers.each do |e|
+    #   if e.answer == @vote.choice_1
+    #   　@answer_1 += 1
+    #   elsif e.answer == @vote.choice_2
+    #   　@answer_2 += 1
+    #   elsif e.answer == @vote.choice_3
+    #   　@answer_3 += 1
+    #   elsif e.answer == @vote.choice_4
+    #     @answer_4 += 1
+    #   end
+    # end
   end
 
   def index

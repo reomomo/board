@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.create!(
+User.create!(
   [
     {
       email: 'taro@example.com',
@@ -53,7 +53,7 @@ Vote.create!(
     {
       user_id: 2,
       title: '会議室が使用できなくなりました',
-      question: '会議時間の変更をお願いします。参加可能日を選択してください。',
+      question: '会議時間の変更をお願いします。参加可能な日時を選択してください。',
       choice_1: '9/2 10:00',
       choice_2: '9/2 15:00',
       choice_3: '9/3 10:00',
@@ -66,6 +66,27 @@ Vote.create!(
       choice_2: '400円',
       choice_3: '300円',
       choice_4: 'それ以下',
+    }
+  ]
+)
+
+VoteAnswer.create!(
+  [
+    {
+      user_id: 1,
+      vote_id: 1,
+      answer: Vote.find(1).choice_1,
+      email: User.find(1).email
+    },{
+      user_id: 2,
+      vote_id: 1,
+      answer: Vote.find(1).choice_1,
+      email: User.find(2).email
+    },{
+      user_id: 1,
+      vote_id: 2,
+      answer: Vote.find(2).choice_1,
+      email: User.find(1).email
     }
   ]
 )

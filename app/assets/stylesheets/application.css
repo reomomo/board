@@ -20,12 +20,14 @@
   box-sizing: border-box;
 }
 
-.total {
-  padding-right: 15px;
+#table {
   visibility: hidden;
 }
 
+.total {
+  padding-right: 15px;
+}
+
 .graph {
-  width: 20px;
   height: 20px;
 }
