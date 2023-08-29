@@ -1,5 +1,22 @@
 <h1>Votes#show</h1>
+<% @answer_1 = 0 %>
+<% @answer_2 = 0 %>
+<% @answer_3 = 0 %>
+<% @answer_4 = 0 %>
 
+<% @answers.each do |e| %>
+<%= e.choice %>
+<%= @vote.choice_1 %>
+  <% if e.choice == @vote.choice_1 %>
+    <% @answer_1 += 1 %>
+  <% elsif e.answer == @vote.choice_2 %>
+    <% @answer_2 += 1 %>
+  <% elsif e.answer == @vote.choice_3 %>
+    <% @answer_3 += 1 %>
+  <% elsif e.answer == @vote.choice_4 %>
+    <% @answer_4 += 1 %>
+  <% end %>
+<% end %>
 <% if @user.vote_answers.find_by(vote_id: @vote.id).present? %>
   <p>回答済</p>
   <h4>タイトル</h4>
@@ -15,27 +32,46 @@
 
   <h4><%= @user.last_name %>さんの回答</h4>
 
-  <%= @user.vote_answers.find_by(vote_id: @vote.id).answer %>
+  <%= @user.vote_answers.find_by(vote_id: @vote.id).choice %>
 
   <p id="notice"><%= notice %></p>
-  <h4>集計結果</h4>
+  <a href="javascript:onClick()">現在の集計状況を見る</a>
+  <table>
+    <tr>
+      <th class="total" id="text"><%= @vote.choice_1 %> :</th>
+      <td class="total" id="total"><%= @answer_1 %></td>
+      <td><div class="graph" id="graph_1"></div></td>
+    </tr>
+    <tr>
+      <th class="total" id="text"><%= @vote.choice_2 %> :</th>
+      <td><%= @answer_2 %></td>
+      <td><div class="graph" id="graph_2"></div></td>
+    </tr>
+    <tr>
+      <th><%= @vote.choice_3 %> :</th>
+      <td><%= @answer_3 %></td>
+      <td><div class="graph" id="graph_3"></div></td>
+    </tr>
+    <tr>
+      <th><%= @vote.choice_4 %> :</th>
+      <td><%= @answer_4 %></td>
+      <td><div class="graph" id="graph_4"></div></td>
+    </tr>
+  </table>
+  <script>
 
-  <%= @vote_answers.answer %>
- <% @answers.each do |e| %>
-  <% if e.answer == @vote.choice_1 %>
-   <% e.answer = answer_1 %>
-  <% end %>
- <% end %>
-  <!--Book.all.sum(:price)-->
-  <% answer_sum = 3 %>
-  <% if @vote.answer_1.present? %>
-  <%= bar_chart Vote.group(:choice_1).sum(:answer_1) %>
-  <%= pie_chart VoteAnswer.group(:answer_1).count %>
-  <% end %>
-  <% if @vote.answer_4.present? %>
-  <%= bar_chart Vote.group(:choice_4).sum(:answer_4) %>
-  <%= pie_chart Vote.group(:answer_4).count %>
-  <% end %>
+
+  function onClick() {
+    const graph_1 = document.getElementById("graph_1");
+    const text = document.getElementById("text");
+    const total = document.getElementById("total");
+    let answer_1 = <%= @answer_1 %>;
+    graph_1.style.backgroundColor = "#33FFFF";
+    graph_1.style.width = answer_1 * 20 + "px";
+    text.style.visibility = "visible";
+    total.style.visibility = "visible";
+  }
+  </script>
 
 
 <% else %>
@@ -50,16 +86,56 @@
   <%= @vote.question %>
   <h4>選択肢（1～50文字）</h4>
   <%= form_with model: @vote_answer do |f| %>
-    <%= f.radio_button :answer, @vote.choice_1 %>
-    <%= label :answer, @vote.choice_1, value: :choice_1 %></br>
-    <%= f.radio_button :answer, @vote.choice_2 %>
-    <%= label :answer, @vote.choice_2, value: :choice_2 %></br>
-    <%= f.radio_button :answer, @vote.choice_3 %>
-    <%= label :answer, @vote.choice_3, value: :choice_3 %></br>
-    <%= f.radio_button :answer, @vote.choice_4 %>
-    <%= label :answer, @vote.choice_4, value: :choice_4 %>
+    <%= f.radio_button :choice, :choice_1 %>
+    <%= label :choice, @vote.choice_1, value: :choice_1 %></br>
+    <%= f.radio_button :choice, :choice_2 %>
+    <%= label :choice, @vote.choice_2, value: :choice_2 %></br>
+    <%= f.radio_button :choice, :choice_3 %>
+    <%= label :choice, @vote.choice_3, value: :choice_3 %></br>
+    <%= f.radio_button :choice, :choice_4 %>
+    <%= label :choice, @vote.choice_4, value: :choice_4 %>
     <%= f.hidden_field :vote_id, :value => @vote.id %>
     <%= f.submit "回答する" %>
   <% end %>
 
+
+
+
+  <a href="javascript:onClick()">現在の集計状況を見る</a>
+  <table>
+    <tr>
+      <th class="total" id="text"><%= @vote.choice_1 %> :</th>
+      <td class="total" id="total"><%= @answer_1 %></td>
+      <td><div class="graph" id="graph_1"></div></td>
+    </tr>
+    <tr>
+      <th class="total" id="text"><%= @vote.choice_2 %> :</th>
+      <td><%= @answer_2 %></td>
+      <td><div class="graph" id="graph_2"></div></td>
+    </tr>
+    <tr>
+      <th><%= @vote.choice_3 %> :</th>
+      <td><%= @answer_3 %></td>
+      <td><div class="graph" id="graph_3"></div></td>
+    </tr>
+    <tr>
+      <th><%= @vote.choice_4 %> :</th>
+      <td><%= @answer_4 %></td>
+      <td><div class="graph" id="graph_4"></div></td>
+    </tr>
+  </table>
+  <script>
+
+
+  function onClick() {
+    const graph_1 = document.getElementById("graph_1");
+    const text = document.getElementById("text");
+    const total = document.getElementById("total");
+    let answer_1 = <%= @answer_1 %>;
+    graph_1.style.backgroundColor = "#33FFFF";
+    graph_1.style.width = answer_1 * 20 + "px";
+    text.style.visibility = "visible";
+    total.style.visibility = "visible";
+  }
+  </script>
 <% end %>
