@@ -9,7 +9,4 @@ class Vote < ApplicationRecord
   validates :choice_3, presence: true, length: {minimum: 1, maximum: 50}
   validates :choice_4, presence: true, length: {minimum: 1, maximum: 50}
 
-
-# @answers = VoteAnswer.where(vote_id: 1)
-
 end

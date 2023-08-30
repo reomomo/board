@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_28_064000) do
+ActiveRecord::Schema.define(version: 2023_08_30_012118) do
+
+  create_table "number_ofs", force: :cascade do |t|
+    t.integer "number_of", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "public_relations", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title", limit: 50, default: "〇月度理事会議事録", null: false
+    t.string "topic", limit: 50, null: false
+    t.string "body", limit: 500, null: false
+    t.datetime "date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

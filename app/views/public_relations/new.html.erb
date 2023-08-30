@@ -1,0 +1,56 @@
+<h1>広報資料作成</h1>
+
+<%= form_with model: @public_relation do |f| %>
+  <h4>理事会開催日時</h4>
+  <%= f.datetime_field :date %>
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+
+  <h4>トピックの数を選択してください</h4>
+
+  <span id="span1"></span>
+  <input type="number" id="number_2" value="1" max="10" />
+  <input type="button" value="追加" onclick="clickBtn()" />
+  <%= @number_of %>
+  <h4>トピック</h4>
+  <%= f.text_field :topic %>
+  <h4>本文</h4>
+  <%= f.text_area :body %>
+
+<script>
+  // $(function() {
+  //   $("#no_input").on("submit", function(e) {
+  //     e.preventDefault();
+  //     let inputNumber = $(".no_form_number").val();
+  //     let url = $(this).attr("action");
+  //     $.ajax({
+  //       url: url,
+  //       type: "POST",
+  //       data: {
+  //         number_of: {number_of: inputNumber}
+  //       },
+  //       dataType: "json"
+  //     })
+  //     .done(function(data) {
+  //       // let html = createHTML(data);
+  //       $("")
+  //     })
+  //   })
+  // })
+  function clickBtn() {
+    const number = document.getElementById("number_2");
+    const valueNumber= number.value;
+    $.ajax({
+      url: "/public_relations/new",
+      method: "GET"
+      data: { value: valueNumber },
+      success: function(response) {
+
+      },
+      error: function(error) {
+
+      }
+    });
+  }
+</script>
+<% end %>
