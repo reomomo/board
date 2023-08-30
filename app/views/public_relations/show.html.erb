@@ -8,15 +8,19 @@
   <% @users.each do |user| %>
   <tr>
     <th><%= user.last_name %> <%= user.first_name %></th>
-    <td><%= user.is_participated %></td>
+    <%= form_with model: user, url: user_path(user.id), method: :patch do |f| %>
+    <td>
+      <%= f.select :is_participated, options_for_select(User.is_participateds_i18n.invert, { :selected => user.is_participated }) %>
+    </td>
+    <td><%= f.submit "変更" %></td>
+    <% end %>
     <td>
       <select name="attendance">
-        <option value="unselected"><%= User.is_participateds[:unselected] %></option>
-        <option value="attendance"><%= User.is_participateds[:attendance] %></option>
-        <option value="absence"><%= User.is_participateds.key(2) %></option>
+        <option value="unselected"><%= User.is_participateds_i18n[:unselected] %></option>
+        <option value="attendance"><%= User.is_participateds_i18n[:attendance] %></option>
+        <option value="absence"><%= User.is_participateds_i18n[:absence] %></option>
       </select>
     </td>
-    <td><%= t("hallo") %></td>
   </tr>
   <% end %>
 </table>

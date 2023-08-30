@@ -1,6 +1,5 @@
 ---
 ja:
-  hallo: "こんにちは"
   enums:
     user:
       is_participated:
