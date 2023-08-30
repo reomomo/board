@@ -7,5 +7,6 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :vote_answers # 理事が退会しても集計結果は残す為、dependent: :destroyはしない
   has_many :public_relations # 理事が変わっても広報は残す為、dependent: :destroyはしない
+  has_many :participants, dependent: :destroy
 
 end

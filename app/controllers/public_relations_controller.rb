@@ -1,8 +1,12 @@
 class PublicRelationsController < ApplicationController
   def new
     @public_relation = PublicRelation.new
-    # @number_of = NumberOf.new
-    @number_of = params[:value]
+    # @number_of = params[:value]
+    # if params[:user_input]
+    #   user_input = params[:user_input].to_i
+    #   @number_of = user_input
+    # end
+
   end
 
   def create
@@ -13,6 +17,7 @@ class PublicRelationsController < ApplicationController
   end
 
   def show
+    @public_relation = PublicRelation.find(params[:id])
   end
 
   def edit

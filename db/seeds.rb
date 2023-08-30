@@ -12,37 +12,37 @@ User.create!(
       email: 'taro@example.com',
       last_name: '投票',
       first_name: '太郎',
-      keyword: 'Management association',
+      keyword: 'Management association 第3期',
       password: 'password',
     }, {
       email: 'jiro@example.com',
       last_name: '掲示',
       first_name: '次郎',
-      keyword: 'Management association',
+      keyword: 'Management association 第3期',
       password: 'password',
     }, {
       email: 'hanako@example.com',
       last_name: 'あん',
       first_name: '花子',
-      keyword: 'Management association',
+      keyword: 'Management association 第3期',
       password: 'password',
     }, {
       email: 'ai@example.com',
       last_name: 'けと',
       first_name: '愛',
-      keyword: 'Management association',
+      keyword: 'Management association 第3期',
       password: 'password',
     }, {
       email: 'ban@example.com',
       last_name: 'けいじ',
       first_name: 'ばん',
-      keyword: 'Management association',
+      keyword: 'Management association 第3期',
       password: 'password',
     }, {
       email: 'an@example.com',
       last_name: 'ばん',
       first_name: 'あん',
-      keyword: 'Management association',
+      keyword: 'Management association 第3期',
       password: 'password',
     }
   ]
@@ -87,6 +87,26 @@ VoteAnswer.create!(
       vote_id: 2,
       answer: Vote.find(2).choice_1,
       email: User.find(1).email
+    }
+  ]
+)
+
+PublicRelation.create!(
+  {
+    user_id: 1,
+    title: "8月度理事会議事録",
+    date: Date.new(2023, 8, 31)
+  }
+)
+
+Category.create!(
+  [
+    {
+      name: "議題"
+    },{
+      name: "報告事項"
+    },{
+      name: "その他"
     }
   ]
 )
