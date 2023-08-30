@@ -14,36 +14,42 @@ User.create!(
       first_name: '太郎',
       keyword: 'Management association 第3期',
       password: 'password',
+      is_participated: 0
     }, {
       email: 'jiro@example.com',
       last_name: '掲示',
       first_name: '次郎',
       keyword: 'Management association 第3期',
       password: 'password',
+      is_participated: 0
     }, {
       email: 'hanako@example.com',
       last_name: 'あん',
       first_name: '花子',
       keyword: 'Management association 第3期',
       password: 'password',
+      is_participated: 0
     }, {
       email: 'ai@example.com',
       last_name: 'けと',
       first_name: '愛',
       keyword: 'Management association 第3期',
       password: 'password',
+      is_participated: 0
     }, {
       email: 'ban@example.com',
       last_name: 'けいじ',
       first_name: 'ばん',
       keyword: 'Management association 第3期',
       password: 'password',
+      is_participated: 0
     }, {
       email: 'an@example.com',
       last_name: 'ばん',
       first_name: 'あん',
       keyword: 'Management association 第3期',
       password: 'password',
+      is_participated: 0
     }
   ]
 )
@@ -92,11 +98,17 @@ VoteAnswer.create!(
 )
 
 PublicRelation.create!(
-  {
-    user_id: 1,
-    title: "8月度理事会議事録",
-    date: Date.new(2023, 8, 31)
-  }
+  [
+    {
+      user_id: 1,
+      title: "7月度理事会議事録",
+      date: Date.new(2023, 7, 31)
+    },{
+      user_id: 2,
+      title: "8月度理事会議事録",
+      date: Date.new(2023, 8, 31)
+    }
+  ]
 )
 
 Category.create!(
@@ -107,6 +119,62 @@ Category.create!(
       name: "報告事項"
     },{
       name: "その他"
+    }
+  ]
+)
+
+Topic.create!(
+  [
+    {
+      public_relation_id: 1,
+      category_id: 1,
+      name: "7月Topic1-1",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 1,
+      category_id: 1,
+      name: "7月Topic1-2",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 1,
+      category_id: 2,
+      name: "7月Topic2-1",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 1,
+      category_id: 2,
+      name: "7月Topic2-2",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 1,
+      category_id: 2,
+      name: "7月Topic2-3",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 1,
+      name: "8月Topic1-1",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 2,
+      name: "8月Topic2-1",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 2,
+      name: "8月Topic2-2",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 2,
+      name: "8月Topic2-3",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 2,
+      name: "8月Topic2-4",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
     }
   ]
 )

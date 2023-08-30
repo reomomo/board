@@ -1,5 +1,24 @@
-<h1>広報資料参照</h1>
+<h1><%= @public_relation.title %></h1>
 
-<%= @public_relation.title %>
-<%= @public_relation.date %>
+<h4>日時</h4>
+<%= format_time(@public_relation.date) %>
+
+<h4>出席者（敬称略）</h4>
+<table>
+  <% @users.each do |user| %>
+  <tr>
+    <th><%= user.last_name %> <%= user.first_name %></th>
+    <td><%= user.is_participated %></td>
+    <td>
+      <select name="attendance">
+        <option value="unselected"><%= User.is_participateds[:unselected] %></option>
+        <option value="attendance"><%= User.is_participateds[:attendance] %></option>
+        <option value="absence"><%= User.is_participateds.key(2) %></option>
+      </select>
+    </td>
+    <td><%= t("hallo") %></td>
+  </tr>
+  <% end %>
+</table>
+
 

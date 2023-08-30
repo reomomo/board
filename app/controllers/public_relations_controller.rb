@@ -18,6 +18,7 @@ class PublicRelationsController < ApplicationController
 
   def show
     @public_relation = PublicRelation.find(params[:id])
+    @users = User.all
   end
 
   def edit

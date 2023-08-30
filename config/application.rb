@@ -18,5 +18,7 @@ module Board
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.time_zone = 'Asia/Tokyo' #タイムゾーンを日本に変更
+    config.i18n.default_locale = :ja # デフォルトのロケールを日本に設定
   end
 end

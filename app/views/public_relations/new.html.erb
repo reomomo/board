@@ -1,30 +1,23 @@
 <h1>広報資料作成</h1>
-  <%= @number_of %>
 
 <%= form_with model: @public_relation do |f| %>
   <h4>理事会開催日時</h4>
   <%= f.datetime_field :date %>
   <h4>タイトル</h4>
   <%= f.text_field :title %>
+  <%= f.submit "次へ進む" %>
+<% end %>
 
-  <h4>トピックスの数を選択してください</h4>
 
+  <!--
   <span id="span1"></span>
   <form action="/public_relations/new" method="post">
   <input type="number" name="user_input" id="number_2" value="1" max="10" />
   <input type="button" value="追加" onclick="clickBtn()" />
   </form>
 
-<% end %>
 
-  <!--
-  <p>jQuery稼働テスト</p>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("p").text("jQuery稼働テスト(稼働中)");
-  });
-</script>
 
 <script>
   function clickBtn() {
