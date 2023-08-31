@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_30_063007) do
+ActiveRecord::Schema.define(version: 2023_08_30_235002) do
 
   create_table "categories", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,4 +87,6 @@ ActiveRecord::Schema.define(version: 2023_08_30_063007) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
 end

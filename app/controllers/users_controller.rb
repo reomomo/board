@@ -13,6 +13,8 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.all
+    @group = Group.all
   end
 
   def edit

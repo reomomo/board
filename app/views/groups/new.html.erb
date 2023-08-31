@@ -1,0 +1,5 @@
+<h1>グループ作成</h1>
+<%= form_with model: @group, url: groups_path do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit "作成" %>
+<% end %>

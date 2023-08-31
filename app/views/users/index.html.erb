@@ -1,2 +1,27 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>理事一覧</h1>
+
+<% @users.each do |user| %>
+  <%= user.last_name %> <%= user.first_name %>
+  <% @group.each_with_index do |group, index| %>
+    <!--buttonのidの名前を都度生成する-->
+    <% id_group = "id_group#{index + 1}" %>
+    <button class="group" id="id_group" onclick="changeColor()"><%= group.name %></button>
+    <%= group.group_users.each do |g_user| %>
+      <%= form_with model: g_user do |f| %>
+        <%= f.select :user_id, options_for_select(User.name, { :selected => g_user.user_id }) %>
+        <%= f.submit "参加する" %>
+      <% end %>
+    <% end %>
+<script>
+  function changeColor() {
+    // let group = document.getElementById("id_group").innerHTML;
+    let group = document.getElementById("id_group")
+    group.style.backgroundColor = "#BBFFFF";
+  }
+</script>
+  <% end %>
+<% end %>
+
+
+
+

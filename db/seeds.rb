@@ -50,6 +50,13 @@ User.create!(
       keyword: 'Management association 第3期',
       password: 'password',
       is_participated: 0
+    }, {
+      email: 'tou@example.com',
+      last_name: 'とう',
+      first_name: 'ひょう',
+      keyword: 'Management association 第2期',
+      password: 'password',
+      is_participated: 0
     }
   ]
 )
@@ -114,7 +121,9 @@ PublicRelation.create!(
 Category.create!(
   [
     {
-      name: "議題"
+      name: "月次管理事務報告"
+    },{
+      name: "審議内容"
     },{
       name: "報告事項"
     },{
@@ -151,6 +160,11 @@ Topic.create!(
       name: "7月Topic2-3",
       body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
     },{
+      public_relation_id: 1,
+      category_id: 3,
+      name: "7月Topic3-1",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
       public_relation_id: 2,
       category_id: 1,
       name: "8月Topic1-1",
@@ -175,6 +189,34 @@ Topic.create!(
       category_id: 2,
       name: "8月Topic2-4",
       body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 3,
+      name: "8月Topic3-1",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 3,
+      name: "8月Topic3-2",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
+    },{
+      public_relation_id: 2,
+      category_id: 3,
+      name: "8月Topic3-3",
+      body: "長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章長い文章長い文章長い文章 長い文章長い文章長い文章 長い文章長い文章長い文章"
     }
   ]
 )
+
+# Group.create!(
+#   [
+#     {
+#       name: "理事会",
+#     },{
+#       name: "イベントグループ",
+#     },{
+#       name: "防災担当",
+#     }
+#   ]
+# )
+

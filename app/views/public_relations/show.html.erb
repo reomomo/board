@@ -20,17 +20,25 @@
   <% end %>
 </table>
 
+【議題】</br>
+<% @categories.each_with_index do |category, index_c| %>
+  <%= index_c + 1 %>. <%= category.name %></br>
+  <% @topics.where(category_id: category.id).each_with_index do |topic, index_t| %>
+    <% if @topics.find_by(category_id: category.id) %>
+      <li>
+        あり
+        （<%= index_t + 1 %>）<%= topic.name %>
+        <%= topic.body %>
+      </li>
+    <% else %>
+      <li>
+        なし
+      </li>
+    <% end %>
+  <% end %>
+<% end %>
 
 
+<!--なしを表示する-->
 
 
-
-
-
-<!--
-      <select name="attendance">
-        <option value="unselected"><%= User.is_participateds_i18n[:unselected] %></option>
-        <option value="attendance"><%= User.is_participateds_i18n[:attendance] %></option>
-        <option value="absence"><%= User.is_participateds_i18n[:absence] %></option>
-      </select>
--->
