@@ -1,4 +1,13 @@
 <h1>グループ一覧</h1>
-<% @groups.each do |group| %>
-  <%= group.name %>
+<% unless @groups.empty? %>
+  <% @groups.each do |group| %>
+    <%= group.name %>
+    <% unless group.name == "その他" %>
+      <%= link_to "削除", group_path(group.id), method: :delete, "data-confirm" => "本当に削除しますか？(このグループに属しているほかのアイテム（広報など）はグループ：その他へ移動します(グループ：その他が無い場合には生成します）" %>
+    <% else %>
+      （このグループは削除できません）
+    <% end %>
+  <% end %>
+<% else %>
+    グループがありません
 <% end %>

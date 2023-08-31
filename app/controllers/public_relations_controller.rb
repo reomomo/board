@@ -28,7 +28,7 @@ class PublicRelationsController < ApplicationController
   end
 
   def update
-    
+
   end
 
   def index
@@ -37,6 +37,6 @@ class PublicRelationsController < ApplicationController
   private
 
   def public_relation_params
-    params.require(:public_relation).permit(:user_id, :title, :topic, :body, :date)
+    params.require(:public_relation).permit(:user_id, :group_id, :title, :topic, :body, :date)
   end
 end

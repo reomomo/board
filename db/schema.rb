@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2023_08_30_235002) do
   end
 
   create_table "group_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "group_id"
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_users_on_group_id"
@@ -34,7 +34,8 @@ ActiveRecord::Schema.define(version: 2023_08_30_235002) do
   end
 
   create_table "public_relations", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
     t.string "title", limit: 50, default: "〇月度理事会議事録", null: false
     t.datetime "date", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -42,8 +43,8 @@ ActiveRecord::Schema.define(version: 2023_08_30_235002) do
   end
 
   create_table "topics", force: :cascade do |t|
-    t.integer "public_relation_id"
-    t.integer "category_id"
+    t.integer "public_relation_id", null: false
+    t.integer "category_id", null: false
     t.string "name", limit: 50, null: false
     t.string "body", limit: 500, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 2023_08_30_235002) do
 
   create_table "votes", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "group_id", null: false
     t.string "title", null: false
     t.string "question", null: false
     t.string "choice_1", limit: 50, null: false

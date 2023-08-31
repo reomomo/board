@@ -2,6 +2,7 @@ class CreateVotes < ActiveRecord::Migration[6.1]
   def change
     create_table :votes do |t|
       t.integer :user_id, null: false
+      t.integer :group_id, null: false
       t.string :title, null: false
       t.string :question, null: false
       t.string :choice_1, null: false, limit:50

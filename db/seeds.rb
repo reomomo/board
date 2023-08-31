@@ -6,57 +6,62 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(
+users = User.create!(
   [
     {
       email: 'taro@example.com',
       last_name: '投票',
       first_name: '太郎',
-      keyword: 'Management association 第3期',
+      keyword: 'Management association',
       password: 'password',
       is_participated: 0
     }, {
       email: 'jiro@example.com',
       last_name: '掲示',
       first_name: '次郎',
-      keyword: 'Management association 第3期',
+      keyword: 'Management association',
       password: 'password',
       is_participated: 0
     }, {
       email: 'hanako@example.com',
       last_name: 'あん',
       first_name: '花子',
-      keyword: 'Management association 第3期',
+      keyword: 'Management association',
       password: 'password',
       is_participated: 0
     }, {
       email: 'ai@example.com',
       last_name: 'けと',
       first_name: '愛',
-      keyword: 'Management association 第3期',
+      keyword: 'Management association',
       password: 'password',
       is_participated: 0
     }, {
       email: 'ban@example.com',
       last_name: 'けいじ',
       first_name: 'ばん',
-      keyword: 'Management association 第3期',
+      keyword: 'Management association',
       password: 'password',
       is_participated: 0
     }, {
       email: 'an@example.com',
       last_name: 'ばん',
       first_name: 'あん',
-      keyword: 'Management association 第3期',
+      keyword: 'Management association',
       password: 'password',
       is_participated: 0
-    }, {
-      email: 'tou@example.com',
-      last_name: 'とう',
-      first_name: 'ひょう',
-      keyword: 'Management association 第2期',
-      password: 'password',
-      is_participated: 0
+    }
+  ]
+)
+
+Group.create!(
+  [
+    {
+      name: "理事会",
+    },{
+      name: "イベントグループ",
+    },{
+      name: "防災担当",
     }
   ]
 )
@@ -64,7 +69,8 @@ User.create!(
 Vote.create!(
   [
     {
-      user_id: 2,
+      user_id: users[0].id,
+      group_id: 1,
       title: '会議室が使用できなくなりました',
       question: '会議時間の変更をお願いします。参加可能な日時を選択してください。',
       choice_1: '9/2 10:00',
@@ -72,7 +78,8 @@ Vote.create!(
       choice_3: '9/3 10:00',
       choice_4: '9/3 15:00',
     },{
-      user_id: 5,
+      user_id: users[2].id,
+      group_id: 1,
       title: 'ハロウィンイベント',
       question: 'ハロウィンイベント用に子供たちにお菓子を用意したいと思います。予算をどのぐらいで設定しますか？',
       choice_1: '500円',
@@ -86,17 +93,17 @@ Vote.create!(
 VoteAnswer.create!(
   [
     {
-      user_id: 1,
+      user_id: users[0].id,
       vote_id: 1,
       answer: Vote.find(1).choice_1,
       email: User.find(1).email
     },{
-      user_id: 2,
+      user_id: users[1].id,
       vote_id: 1,
       answer: Vote.find(1).choice_1,
       email: User.find(2).email
     },{
-      user_id: 1,
+      user_id: users[0].id,
       vote_id: 2,
       answer: Vote.find(2).choice_1,
       email: User.find(1).email
@@ -107,11 +114,13 @@ VoteAnswer.create!(
 PublicRelation.create!(
   [
     {
-      user_id: 1,
+      user_id: users[0].id,
+      group_id: 1,
       title: "7月度理事会議事録",
       date: Date.new(2023, 7, 31)
     },{
-      user_id: 2,
+      user_id: users[1].id,
+      group_id: 1,
       title: "8月度理事会議事録",
       date: Date.new(2023, 8, 31)
     }
@@ -207,16 +216,3 @@ Topic.create!(
     }
   ]
 )
-
-# Group.create!(
-#   [
-#     {
-#       name: "理事会",
-#     },{
-#       name: "イベントグループ",
-#     },{
-#       name: "防災担当",
-#     }
-#   ]
-# )
-

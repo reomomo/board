@@ -1,5 +1,6 @@
 class Vote < ApplicationRecord
   belongs_to :user
+  belongs_to :group
   has_many :vote_answers, dependent: :destroy
 
   validates :title, presence: true, length: {minimum: 2, maximum: 20}

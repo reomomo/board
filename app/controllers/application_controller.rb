@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:top, :board]
 
   def after_sign_in_path_for(resource)
-    public_relation_path(id: 1)
+    groups_path
   end
 
   def after_sign_out_path_for(resource)

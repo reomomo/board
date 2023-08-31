@@ -23,22 +23,16 @@
 【議題】</br>
 <% @categories.each_with_index do |category, index_c| %>
   <%= index_c + 1 %>. <%= category.name %></br>
-  <% @topics.where(category_id: category.id).each_with_index do |topic, index_t| %>
-    <% if @topics.find_by(category_id: category.id) %>
+  <% if @topics.find_by(category_id: category.id) %>
+    <% @topics.where(category_id: category.id).each_with_index do |topic, index_t| %>
       <li>
-        あり
         （<%= index_t + 1 %>）<%= topic.name %>
         <%= topic.body %>
       </li>
-    <% else %>
-      <li>
-        なし
-      </li>
     <% end %>
+  <% else %>
+    <li>
+      なし
+    </li>
   <% end %>
 <% end %>
-
-
-<!--なしを表示する-->
-
-

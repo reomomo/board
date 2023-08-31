@@ -1,11 +1,14 @@
 <h4>グループ：「<%= @group.name %>」の情報</h4>
 
 <h5>参加者</h5>
-<% @group_users.each do |group_user| %>
-  <% unless @group_users.empty? %>
+
+<% unless @group_users.empty? %>
+  <% @group_users.each do |group_user| %>
     <%= group_user.user.full_name %>
     <%= link_to "グループ退会", destroy_user_path(group_user.id), method: :delete, "data-confirm" => "グループを退会しますか？" %>
   <% end %>
+<% else %>
+  参加している方はいません
 <% end %>
 
 <% if @users_ary.empty? %>
