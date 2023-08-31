@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'groups/new'
-  get 'groups/index'
-  get 'groups/edit'
   devise_for :users
   root to: "homes#top"
   get "/board" => "homes#board"
@@ -14,6 +11,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update, :destroy]
   patch '/user/change/:id' => 'users#change', as:'change_user'
   resources :groups, except: [:show]
-
+  resources :group_user, only: [:new, :index, :update]
+  post "/group_users/create_group" => "group_users#create_group", as: 'create_group'
+  post "/group_users/add_user" => "group_users#add_user", as: 'add_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

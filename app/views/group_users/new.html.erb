@@ -1,0 +1,4 @@
+<%= form_with model: @gourp_user do |group_user| %>
+  <%= f.select :user_id, @users, :selected => group_user.user_id %>
+  <%= f.hidden_field :group_id, :value => %>
+<% end %>

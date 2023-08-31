@@ -8,8 +8,7 @@
     <button class="group" id="id_group" onclick="changeColor()"><%= group.name %></button>
     <%= group.group_users.each do |g_user| %>
       <%= form_with model: g_user do |f| %>
-        <%= f.select :user_id, options_for_select(User.name, { :selected => g_user.user_id }) %>
-        <%= f.submit "参加する" %>
+        <%= f.submit g_user %>
       <% end %>
     <% end %>
 <script>
