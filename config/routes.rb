@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   resources :topics, only: [:new, :create, :edit, :update, :destroy]
   resources :users, only: [:show, :index, :edit, :update, :destroy]
   patch '/user/change/:id' => 'users#change', as:'change_user'
-  resources :groups, except: [:show]
-  resources :group_user, only: [:new, :index, :update]
-  post "/group_users/create_group" => "group_users#create_group", as: 'create_group'
+  resources :groups
+  post "/group_users/add_group" => "group_users#add_group", as: 'add_group'
   post "/group_users/add_user" => "group_users#add_user", as: 'add_user'
+  delete "/group_users/:id/destroy_user" => "group_users#destroy_user", as: 'destroy_user'
+  delete "/group_users/:id/destroy_group" => "group_users#destroy_group", as: 'destroy_group'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

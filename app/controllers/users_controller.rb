@@ -10,6 +10,16 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    @group_users =  @user.group_users.order(:group_id)
+    @groups_ary = []
+    @groups = Group.all
+    @groups.each do |group|
+      unless @user.group_users.find_by(group_id: group.id).present?
+        @groups_ary.push(group)
+      end
+    end
+    @gourp_user = GroupUser.new
   end
 
   def index
@@ -18,6 +28,10 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+
   end
 
   def destroy

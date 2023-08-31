@@ -1,27 +1,29 @@
 class GroupUsersController < ApplicationController
-  def new
-    @gourp_user = GroupUser.new
-  end
 
-  def create_group
-
+  def add_group
+    @group_user = GroupUser.new(g_u_params)
+    @group_user.save
+    redirect_to user_path(@group_user.user.id)
   end
 
   def add_user
-    @gourp_user = GroupUser.new(g_u_params)
-    @users = User.all
-    @group_id = params[:memo1_id]
+    @group_user = GroupUser.new(g_u_params)
     @group_user.save
-    redirect_to groups_path
+    redirect_to group_path(@group_user.group.id)
   end
 
-  def index
-    @users = User.all
+  def destroy_user
+    group_user = GroupUser.find(params[:id])
+    memo_id = group_user.group.id
+    group_user.destroy
+    redirect_to group_path(memo_id)
   end
 
-
-  def update
-
+  def destroy_group
+    group_user = GroupUser.find(params[:id])
+    memo_id = group_user.user.id
+    group_user.destroy
+    redirect_to user_path(memo_id)
   end
 
   private

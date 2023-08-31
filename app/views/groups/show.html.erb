@@ -1,0 +1,23 @@
+<h4>グループ：「<%= @group.name %>」の情報</h4>
+
+<h5>参加者</h5>
+<% @group_users.each do |group_user| %>
+  <% unless @group_users.empty? %>
+    <%= group_user.user.full_name %>
+    <%= link_to "グループ退会", destroy_user_path(group_user.id), method: :delete, "data-confirm" => "グループを退会しますか？" %>
+  <% end %>
+<% end %>
+
+<% if @users_ary.empty? %>
+  <h5>全員参加中です</h5>
+<% else %>
+  <h5>グループへ追加する方を選択してください</h5>
+  <% @users_ary.each do |user| %>
+    <%= user.full_name %>
+    <%= form_with model: @gourp_user, url: add_user_path, method: :post do |f| %>
+      <%= f.hidden_field :group_id, :value => @group.id %>
+      <%= f.hidden_field :user_id, :value => user.id %>
+      <%= f.submit "参加" %>
+    <% end %>
+  <% end %>
+<% end %>

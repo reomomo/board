@@ -1,2 +1,24 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1><%= @user.full_name %>さんの情報</h1>
+
+<%= @user.email %>
+<h5>参加しているグループ</h5>
+<% @group_users.each do |group_user| %>
+  <% unless @group_users.empty? %>
+    <%= group_user.group.name %>
+    <%= link_to "グループ退会", destroy_group_path(group_user.id), method: :delete, "data-confirm" => "グループを退会しますか？" %>
+  <% end %>
+<% end %>
+
+<% if @groups_ary.empty? %>
+  <h5>全てのグループに参加中です</h5>
+<% else %>
+  <h5>参加するグループを選択してください</h5>
+  <% @groups_ary.each do |group| %>
+    <%= group.name %>
+    <%= form_with model: @gourp_user, url: add_group_path, method: :post do |f| %>
+      <%= f.hidden_field :group_id, :value => group.id %>
+      <%= f.hidden_field :user_id, :value => @user.id %>
+      <%= f.submit "参加" %>
+    <% end %>
+  <% end %>
+<% end %>
