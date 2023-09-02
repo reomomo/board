@@ -1,2 +1,6 @@
-<h1>Groups#edit</h1>
-<p>Find me in app/views/groups/edit.html.erb</p>
+<h1>グループ名変更</h1>
+
+<%= form_with model: @group do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit "変更する" %>
+<% end %>

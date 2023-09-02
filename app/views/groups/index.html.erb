@@ -1,13 +1,27 @@
+<h1>グループ作成</h1>
+<%= form_with model: @group, url: groups_path do |f| %>
+  <%= f.text_field :name %>
+  <%= f.hidden_field :memo1_id, :value => @group.id %>
+  <%= f.submit "作成" %>
+<% end %>
+
 <h1>グループ一覧</h1>
+※作成したグループを削除すると「その他グループ」が自動生成され、削除したグループに紐づく広報やアンケートは「その他グループ」に移動します。</br>
+※「その他グループ」がある場合、「その他グループ」は削除できません。
 <% unless @groups.empty? %>
   <% @groups.each do |group| %>
-    <%= group.name %>
+    <h2><%= group.name %></h2>
+    参加人数：<%= group.group_users.size %>名
+    <button><%= link_to "グループ参加者を確認する", group_path(group.id) %></button>
+    <button><%= link_to "グループ名を変更する", edit_group_path(group.id) %></button>
     <% unless group.name == "その他" %>
-      <%= link_to "削除", group_path(group.id), method: :delete, "data-confirm" => "本当に削除しますか？(このグループに属しているほかのアイテム（広報など）はグループ：その他へ移動します(グループ：その他が無い場合には生成します）" %>
+      <button><%= link_to "グループを削除する", group_path(group.id), method: :delete, "data-confirm" => "本当に削除しますか？(このグループに属しているほかのアイテム（広報など）はグループ：その他へ移動します(グループ：その他が無い場合には生成します）" %></button>
     <% else %>
       （このグループは削除できません）
     <% end %>
+    </br>
   <% end %>
 <% else %>
     グループがありません
 <% end %>
+

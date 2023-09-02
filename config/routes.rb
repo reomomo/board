@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :topics, only: [:new, :create, :edit, :update, :destroy]
   resources :users, only: [:show, :index, :edit, :update, :destroy]
   patch '/user/change/:id' => 'users#change', as:'change_user'
-  resources :groups
+  resources :groups, except: [:new]
   post "/group_users/add_group" => "group_users#add_group", as: 'add_group'
   post "/group_users/add_user" => "group_users#add_user", as: 'add_user'
   delete "/group_users/:id/destroy_user" => "group_users#destroy_user", as: 'destroy_user'

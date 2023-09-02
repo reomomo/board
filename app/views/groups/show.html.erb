@@ -24,3 +24,10 @@
     <% end %>
   <% end %>
 <% end %>
+<button><%= link_to "グループ名を変更する", edit_group_path(@group.id) %></button>
+<% unless @group.name == "その他" %>
+  <button><%= link_to "グループを削除する", group_path(@group.id), method: :delete, "data-confirm" => "本当に削除しますか？(このグループに属しているほかのアイテム（広報など）はグループ：その他へ移動します(グループ：その他が無い場合には生成します）" %></button>
+<% else %>
+  （このグループは削除できません）
+<% end %>
+<button><%= link_to "一覧へ戻る", groups_path %></button>
