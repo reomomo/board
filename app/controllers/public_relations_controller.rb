@@ -16,6 +16,11 @@ class PublicRelationsController < ApplicationController
     redirect_to public_relation_path(@public_relation.id)
   end
 
+  def index
+    @groups = Group.all
+    @public_relations = PublicRelation.all
+  end
+
   def show
     @public_relation = PublicRelation.find(params[:id])
     @users = User.where(keyword: 'Management association 第3期').all
@@ -29,9 +34,6 @@ class PublicRelationsController < ApplicationController
 
   def update
 
-  end
-
-  def index
   end
 
   private

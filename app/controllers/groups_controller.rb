@@ -6,6 +6,11 @@ class GroupsController < ApplicationController
     redirect_to group_path(@group.id)
   end
 
+  def index
+    @group = Group.new
+    @groups = Group.all
+  end
+
   def show
     @group = Group.find(params[:id])
     @group_users =  @group.group_users.order(:user_id)
@@ -17,11 +22,6 @@ class GroupsController < ApplicationController
       end
     end
     @gourp_user = GroupUser.new
-  end
-
-  def index
-    @group = Group.new
-    @groups = Group.all
   end
 
   def edit

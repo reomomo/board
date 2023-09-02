@@ -13,6 +13,9 @@ class VotesController < ApplicationController
     end
   end
 
+  def index
+  end
+
   def show
     @vote = Vote.find(params[:id])
     @user = current_user
@@ -23,9 +26,6 @@ class VotesController < ApplicationController
     @answer_2 = 0
     @answer_3 = 0
     @answer_4 = 0
-  end
-
-  def index
   end
 
   def edit
