@@ -13,10 +13,10 @@
 
 <div id="group">
   <h1>掲示物一覧</h1>
-
   <% @public_relations.each do |pr| %>
     <h3><%= pr.title %></h3>
     理事会日時
     <%= format_time(pr.date) %>
+    <%= link_to "詳細", public_relation_path(pr.id) %>
   <% end %>
 </div>

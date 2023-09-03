@@ -1,12 +1,6 @@
 class PublicRelationsController < ApplicationController
   def new
     @public_relation = PublicRelation.new
-    # @number_of = params[:value]
-    # if params[:user_input]
-    #   user_input = params[:user_input].to_i
-    #   @number_of = user_input
-    # end
-
   end
 
   def create
@@ -23,10 +17,10 @@ class PublicRelationsController < ApplicationController
 
   def show
     @public_relation = PublicRelation.find(params[:id])
-    @users = User.where(keyword: 'Management association 第3期').all
+    @users = User.all
     @categories = Category.all
     @topics = @public_relation.topics.all
-
+    @topic = @public_relation.topics.where()
   end
 
   def edit

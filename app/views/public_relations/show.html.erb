@@ -1,13 +1,24 @@
-<h1><%= @public_relation.title %></h1>
-
-<h4>日時</h4>
+<h1>掲示物作成</h1>
+<h3>タイトル</h3>
+<%= @public_relation.title %>
+<h3>日時</h3>
 <%= format_time(@public_relation.date) %>
-
-<h4>出席者（敬称略）</h4>
+<%= link_to "タイトル・日時の編集", edit_public_relation_path(@public_relation.id) %></br>
+<% @categories.each do |category, index_c| %>
+  <h3><%= category.name %></h3>
+  <%= link_to "追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></br>
+  <% if @topics.find_by(category_id: category.id) %>
+    <% @topics.where(category_id: category.id).each do |topic, index_t| %>
+      <%= topic.name %>
+      <%= link_to "編集", edit_topic_path(topic.id) %></br>
+    <% end %>
+  <% end %>
+<% end %>
+<h3>出席者編集（敬称略）</h3>
 <table>
   <% @users.each do |user| %>
   <tr>
-    <th><%= user.last_name %> <%= user.first_name %></th>
+    <td><%= user.full_name %></td>
     <%= form_with model: user, url: change_user_path(user.id), method: :patch do |f| %>
     <td>
       <%= f.select :is_participated, options_for_select(User.is_participateds_i18n.invert, { :selected => user.is_participated }) %>
@@ -15,11 +26,19 @@
     <%= hidden_field_tag :memo_id, @public_relation.id %>
     <td><%= f.submit "変更" %></td>
     <% end %>
-
   </tr>
   <% end %>
 </table>
 
+<!--掲示物としてのデザイン-->
+<h2><%= @public_relation.title %></h2>
+<strong>日時</strong><%= format_time(@public_relation.date) %></br>
+<strong>出席者（敬称略）</strong>
+<% @users.each do |user| %>
+  <% unless user.is_participated == User.is_participateds.key(0) %>
+    <%= user.full_name %> : <%= user.is_participated_i18n %>
+  <% end %>
+<% end %>
 【議題】</br>
 <% @categories.each_with_index do |category, index_c| %>
   <%= index_c + 1 %>. <%= category.name %></br>
