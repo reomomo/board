@@ -26,6 +26,19 @@ class VotesController < ApplicationController
     @answer_2 = 0
     @answer_3 = 0
     @answer_4 = 0
+    @answers.each do |ans|
+      case ans.answer
+      when @vote.choice_1
+        @answer_1 += 1
+      when @vote.choice_2
+        @answer_2 += 1
+      when @vote.choice_3
+        @answer_3 += 1
+      when @vote.choice_4
+        @answer_4 += 1
+      end
+    end
+
   end
 
   def edit

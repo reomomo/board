@@ -90,26 +90,26 @@ Vote.create!(
   ]
 )
 
-VoteAnswer.create!(
-  [
-    {
-      user_id: users[0].id,
-      vote_id: 1,
-      answer: Vote.find(1).choice_1,
-      email: User.find(1).email
-    },{
-      user_id: users[1].id,
-      vote_id: 1,
-      answer: Vote.find(1).choice_1,
-      email: User.find(2).email
-    },{
-      user_id: users[0].id,
-      vote_id: 2,
-      answer: Vote.find(2).choice_1,
-      email: User.find(1).email
-    }
-  ]
-)
+# VoteAnswer.create!(
+#   [
+#     {
+#       user_id: users[0].id,
+#       vote_id: 1,
+#       answer: Vote.find(1).choice_1,
+#       email: User.find(1).email
+#     },{
+#       user_id: users[1].id,
+#       vote_id: 1,
+#       answer: Vote.find(1).choice_1,
+#       email: User.find(2).email
+#     },{
+#       user_id: users[0].id,
+#       vote_id: 2,
+#       answer: Vote.find(2).choice_1,
+#       email: User.find(1).email
+#     }
+#   ]
+# )
 
 PublicRelation.create!(
   [
