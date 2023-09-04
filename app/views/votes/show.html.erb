@@ -1,3 +1,4 @@
+<!--コントローラーへ移行できないか-->
 <% @answers.each do |e| %>
   <% if e.answer == @vote.choice_1 %>
     <% @answer_1 += 1 %>
@@ -10,7 +11,7 @@
   <% end %>
 <% end %>
 
-<% if @user.vote_answers.find_by(vote_id: @vote.id).present? %>
+<% if @user.vote_answers.find_by(vote_id: @vote.id) %>
   <h1>アンケートのご協力ありがとうございます。</h1>
 
   <h4>回答状況</h4>

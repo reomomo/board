@@ -2,7 +2,7 @@
 
 <h5>参加者</h5>
 
-<% unless @group_users.empty? %>
+<% if @group_users %>
   <% @group_users.each do |group_user| %>
     <%= group_user.user.full_name %>
     <%= link_to "グループ退会", destroy_user_path(group_user.id), method: :delete, "data-confirm" => "グループを退会しますか？" %>
