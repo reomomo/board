@@ -1,23 +1,27 @@
-<select>
-  <% @groups.each_with_index do |group, index| %>
-    <option onclick="group+#{index}()"><%= group.name %></option>
-  <% end %>
-</select>
+<h1>掲示物一覧</h1>
 
-<script>
-// group名タップごとに表示変更をさせるようにできないか
-  function group1() {
-    const test = document.getElementById("group");
-    test.style.visibility = "visible";
-  }
-</script>
 
-<div id="group">
-  <h1>掲示物一覧</h1>
-  <% @public_relations.each do |pr| %>
+<h3>確認したい掲示物のグループを選択してください</h3>
+<%= link_to "すべて", public_relations_path(group_key: 0) %>
+<% @groups.each.with_index(1) do |group, index| %>
+  <%= link_to group.name, public_relations_path(group_key: index) %>
+  <%= index %>
+<% end %>
+
+<% if @key == 0 %>
+   <% @public_relations.each do |pr| %>
     <h3><%= pr.title %></h3>
     理事会日時
     <%= format_time(pr.date) %>
     <%= link_to "詳細", public_relation_path(pr.id) %>
   <% end %>
-</div>
+<% elsif @key > 0 %>
+  <% @groups.each.with_index(1) do |group, index| %>
+    <% group.public_relations.where(group_id: @key).each do |pr| %>
+      <h3><%= pr.title %></h3>
+      理事会日時
+      <%= format_time(pr.date) %>
+      <%= link_to "詳細", public_relation_path(pr.id) %>
+    <% end %>
+  <% end %>
+<% end %>

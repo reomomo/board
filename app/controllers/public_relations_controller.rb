@@ -13,6 +13,7 @@ class PublicRelationsController < ApplicationController
   def index
     @groups = Group.all
     @public_relations = PublicRelation.all
+    @key = params[:group_key].to_i
   end
 
   def show
