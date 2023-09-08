@@ -1,3 +1,6 @@
+グループ名変更画面へ
+<%= render 'group', groups: @groups %>
+
 <h1>掲示物一覧</h1>
 
 
@@ -5,7 +8,6 @@
 <%= link_to "すべて", public_relations_path(group_key: 0) %>
 <% @groups.each.with_index(1) do |group, index| %>
   <%= link_to group.name, public_relations_path(group_key: index) %>
-  <%= index %>
 <% end %>
 
 <% if @key == 0 %>

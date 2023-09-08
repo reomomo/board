@@ -14,6 +14,7 @@ class VotesController < ApplicationController
   end
 
   def index
+    @groups = Group.all
   end
 
   def show
