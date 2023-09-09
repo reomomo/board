@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def new
     @vote = Vote.new
   end
@@ -43,9 +45,13 @@ class VotesController < ApplicationController
   end
 
   def edit
+    @vote = Vote.find(params[:id])
   end
 
   def update
+    @vote = Vote.find(params[:id])
+    @vote.update(vote_params)
+    redirect_to vote_path(@vote.id)
   end
 
   def destroy
@@ -55,5 +61,13 @@ class VotesController < ApplicationController
 
   def vote_params
     params.require(:vote).permit(:user_id, :group_id, :title, :question, :choice_1, :choice_2, :choice_3, :choice_4)
+  end
+
+  def is_matching_login_user
+    @vote = Vote.find(params[:id])
+    unless @vote.user_id == current_user.id
+      flash[:vote_notice] = "アンケートの編集はアンケート作成者のみ可能です"
+      redirect_to vote_path(@vote.id)
+    end
   end
 end

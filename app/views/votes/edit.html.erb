@@ -1,2 +1,25 @@
-<h1>Votes#edit</h1>
-<p>Find me in app/views/votes/edit.html.erb</p>
+<h1>投票内容 編集</h1>
+
+<% if @vote.errors.any? %>
+  <%= @vote.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @vote.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @vote do |f| %>
+  <h4>タイトル（2～20文字）</h4>
+  <%= f.text_area :title %>
+
+  <h4>質問（2～200文字）</h4>
+  <%= f.text_area :question %>
+  <h4>選択肢（1～50文字）</h4>
+  <%= f.text_field :choice_1 %>
+  <%= f.text_field :choice_2 %>
+  <%= f.text_field :choice_3 %>
+  <%= f.text_field :choice_4 %>
+
+  <%= f.submit "登録" %>
+<% end %>

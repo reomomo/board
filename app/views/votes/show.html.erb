@@ -5,6 +5,8 @@
   const answer_4 = <%= @answer_4 %>
 </script>
 
+<%= flash[:vote_notice] %>
+
 <% if @user.vote_answers.find_by(vote_id: @vote.id) %>
   <h1>アンケートのご協力ありがとうございます。</h1>
 
