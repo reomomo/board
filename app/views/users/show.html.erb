@@ -1,4 +1,5 @@
 <h1><%= @user.full_name %>さんの情報</h1>
+<%= flash[:user_notice] %>
 
 <%= @user.email %>
 <h5>参加しているグループ</h5>
@@ -6,7 +7,7 @@
   <% @group_users.each do |group_user| %>
     <% unless @group_users.empty? %>
       <%= group_user.group.name %>
-      <%= link_to "グループ退会", destroy_group_path(group_user.id), method: :delete, "data-confirm" => "グループを退会しますか？" %>
+      <button><%= link_to "グループ退会", destroy_group_path(group_user.id), method: :delete, "data-confirm" => "グループを退会しますか？" %></button>
     <% end %>
   <% end %>
 <% else %>
@@ -30,3 +31,7 @@
     <% end %>
   <% end %>
 <% end %>
+
+<button><%= link_to "理事情報を編集する", edit_user_path(@user.id) %></button>
+<button><%= link_to "理事会を退会する", user_path(@user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %></button>
+<button><%= link_to "理事一覧へ", users_path %></button>

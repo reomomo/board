@@ -10,4 +10,7 @@
     参加しているグループはありません
   <% end %>
   <%= link_to "理事登録状況", user_path(user.id) %>
+  <button><%= link_to "理事情報を編集する", edit_user_path(user.id) %></button>
+  <button><%= link_to "理事会を退会する", user_path(user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %></button>
+
 <% end %>

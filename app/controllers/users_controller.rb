@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+
   def change
     @user = User.find(params[:id])
     @user.email = @user.email
@@ -27,18 +29,35 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
-
+    @user = User.find(params[:id])
+    if @user.id == current_user.id
+      @user.update(user_params)
+    end
+    redirect_to user_path(@user.id)
   end
 
   def destroy
+    # user = User.find(params[:id])
+    # user.destroy
+    # reset_session
+    # redirect_to root_path
   end
 
   private
 
   def user_params
     params.require(:user).permit(:email, :last_name, :first_name, :keyword, :is_participated)
+  end
+
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      flash[:user_notice] = "理事情報の編集・削除は本人のみ可能です"
+      redirect_to user_path(user.id)
+    end
   end
 end
