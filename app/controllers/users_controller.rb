@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @group = Group.all
   end
 
   def show

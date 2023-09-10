@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def new
     @vote = Vote.new
@@ -17,6 +17,7 @@ class VotesController < ApplicationController
 
   def index
     @groups = Group.all
+    @votes = Vote.all
   end
 
   def show
@@ -55,6 +56,9 @@ class VotesController < ApplicationController
   end
 
   def destroy
+    vote = Vote.find(params[:id])
+    vote.destroy
+    redirect_to votes_path
   end
 
   private
@@ -66,7 +70,7 @@ class VotesController < ApplicationController
   def is_matching_login_user
     @vote = Vote.find(params[:id])
     unless @vote.user_id == current_user.id
-      flash[:vote_notice] = "アンケートの編集はアンケート作成者のみ可能です"
+      flash[:vote_notice] = "アンケートの編集・削除はアンケート作成者のみ可能です"
       redirect_to vote_path(@vote.id)
     end
   end

@@ -23,3 +23,7 @@
 
   <%= f.submit "登録" %>
 <% end %>
+
+<button><%= link_to "詳細へ戻る", vote_path(@vote.id) %></button>
+<button><%= link_to "アンケート一覧へ戻る", votes_path %></button>
+<button><%= link_to "削除", vote_path(@vote.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></button>

@@ -14,7 +14,7 @@ class User < ApplicationRecord
   enum is_participated: { unselected: 0, attendance: 1, absence: 2 }
 
   def full_name
-    self.last_name + self.first_name
+    self.last_name + " " + self.first_name
   end
 
 end

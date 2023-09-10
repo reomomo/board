@@ -1,4 +1,12 @@
 グループ名変更
 <%= render 'public_relations/group', groups: @groups %>
 
-<h1>Votes#index</h1>
+<h1>アンケート一覧</h1>
+
+
+<% @votes.each do |vote| %>
+  <%= vote.title %>
+  <button><%= link_to "詳細", vote_path(vote.id) %></button>
+  <button><%= link_to "編集", edit_vote_path(vote.id) %></button>
+  <button><%= link_to "削除", vote_path(vote.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></button>
+<% end %>

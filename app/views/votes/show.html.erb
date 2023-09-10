@@ -124,4 +124,6 @@
   </script>
 <% end %>
 
-
+<button><%= link_to "アンケート一覧へ", votes_path %></button>
+<button><%= link_to "編集", edit_vote_path(@vote.id) %></button>
+<button><%= link_to "削除", vote_path(@vote.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></button>

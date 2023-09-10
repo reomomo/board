@@ -1,26 +1,13 @@
-<h1>理事一覧</h1>
+<h1>理事一覧</h1>（敬称略）
 
 <% @users.each do |user| %>
-  <%= user.last_name %> <%= user.first_name %>
-  <% @group.each_with_index do |group, index| %>
-    <!--buttonのidの名前を都度生成する-->
-    <% id_group = "id_group#{index + 1}" %>
-    <button class="group" id="id_group" onclick="changeColor()"><%= group.name %></button>
-    <%= group.group_users.each do |g_user| %>
-      <%= form_with model: g_user do |f| %>
-        <%= f.submit g_user %>
-      <% end %>
+  <%= user.full_name %>：
+  <% if user.group_users.present? %>
+    <% user.group_users.each_with_index do |g_user, index| %>
+        <%= g_user.group.name %>
     <% end %>
-<script>
-  function changeColor() {
-    // let group = document.getElementById("id_group").innerHTML;
-    let group = document.getElementById("id_group")
-    group.style.backgroundColor = "#BBFFFF";
-  }
-</script>
+  <% else %>
+    参加しているグループはありません
   <% end %>
+  <%= link_to "理事登録状況", user_path(user.id) %>
 <% end %>
-
-
-
-
