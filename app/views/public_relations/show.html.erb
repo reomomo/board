@@ -11,6 +11,7 @@
     <% @topics.where(category_id: category.id).each do |topic, index_t| %>
       <%= topic.name %>
       <%= link_to "編集", edit_topic_path(topic.id) %></br>
+      <%= link_to "削除", topic_path(topic.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
     <% end %>
   <% end %>
 <% end %>

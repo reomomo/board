@@ -14,12 +14,23 @@ class TopicsController < ApplicationController
   end
 
   def edit
+    @topic = Topic.find(params[:id])
+    @public_relation = @topic.public_relation
+    @category = @topic.category
   end
 
   def update
+    @topic = Topic.find(params[:id])
+    @public_relation = @topic.public_relation
+    @category = @topic.category
+    @topic.update(topic_params)
+    redirect_to public_relation_path(@public_relation.id)
   end
 
   def destroy
+    topic = Topic.find(params[:id])
+    topic.destroy
+    redirect_to public_relation_path(topic.public_relation_id)
   end
 
   private

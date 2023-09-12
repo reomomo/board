@@ -5,10 +5,9 @@ Rails.application.routes.draw do
   resources :votes
   resources :vote_answers, only: [:create]
   resources :public_relations
-  resources :participants, only: [:new, :create, :edit, :update]
-  resources :categories, only: [:create, :index, :edit, :update, :destroy]
-  resources :topics, only: [:new, :create, :edit, :update, :destroy]
-  resources :users, only: [:show, :index, :edit, :update, :destroy]
+  resources :categories, except: [:new, :show]
+  resources :topics, except: [:index, :show]
+  resources :users, except: [:new, :create]
   patch '/user/change/:id' => 'users#change', as:'change_user'
   resources :groups, except: [:new]
   post "/group_users/add_group" => "group_users#add_group", as: 'add_group'

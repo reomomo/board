@@ -1,2 +1,11 @@
-<h1>Topics#edit</h1>
-<p>Find me in app/views/topics/edit.html.erb</p>
+<h3><%= @public_relation.title %>の「<%= @category.name %>」に追加</h3>
+
+<%= form_with model: @topic do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_area :body %>
+  <%= f.hidden_field :public_relation_id, :value => @public_relation_id %>
+  <%= f.hidden_field :category_id, :value => @category_id %>
+  <%= f.submit "追加する" %>
+<% end %>
+
+<%= link_to "削除", topic_path(@topic.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
