@@ -17,7 +17,11 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users
   has_many :group_users, dependent: :destroy
 
-  enum is_participated: { unselected: 0, attendance: 1, absence: 2 }
+  enum is_participated: {
+    unselected: 0, # 未選択
+    attendance: 1, # 出席
+    absence: 2 # 欠席
+  }
 
   def full_name
     self.last_name + " " + self.first_name

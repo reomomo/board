@@ -14,42 +14,48 @@ users = User.create!(
       first_name: '太郎',
       keyword: 'Management association',
       password: 'password',
-      is_participated: 0
+      is_participated: 0,
+      is_deleted: false
     }, {
       email: 'jiro@example.com',
       last_name: '掲示',
       first_name: '次郎',
       keyword: 'Management association',
       password: 'password',
-      is_participated: 0
+      is_participated: 0,
+      is_deleted: false
     }, {
       email: 'hanako@example.com',
       last_name: 'あん',
       first_name: '花子',
       keyword: 'Management association',
       password: 'password',
-      is_participated: 0
+      is_participated: 0,
+      is_deleted: false
     }, {
       email: 'ai@example.com',
       last_name: 'けと',
       first_name: '愛',
       keyword: 'Management association',
       password: 'password',
-      is_participated: 0
+      is_participated: 0,
+      is_deleted: false
     }, {
       email: 'ban@example.com',
       last_name: 'けいじ',
       first_name: 'ばん',
       keyword: 'Management association',
       password: 'password',
-      is_participated: 0
+      is_participated: 0,
+      is_deleted: false
     }, {
       email: 'an@example.com',
       last_name: 'ばん',
       first_name: 'あん',
       keyword: 'Management association',
       password: 'password',
-      is_participated: 0
+      is_participated: 0,
+      is_deleted: false
     }
   ]
 )
@@ -95,18 +101,15 @@ Vote.create!(
 #     {
 #       user_id: users[0].id,
 #       vote_id: 1,
-#       answer: Vote.find(1).choice_1,
-#       email: User.find(1).email
+#       answer: Vote.find(1).choice_1
 #     },{
 #       user_id: users[1].id,
 #       vote_id: 1,
-#       answer: Vote.find(1).choice_1,
-#       email: User.find(2).email
+#       answer: Vote.find(1).choice_1
 #     },{
 #       user_id: users[0].id,
 #       vote_id: 2,
-#       answer: Vote.find(2).choice_1,
-#       email: User.find(1).email
+#       answer: Vote.find(2).choice_1
 #     }
 #   ]
 # )

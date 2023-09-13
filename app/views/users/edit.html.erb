@@ -10,5 +10,5 @@
 <% end %>
 
 <button><%= link_to "理事登録状況へ戻る", user_path(@user.id) %></button>
-<button><%= link_to "理事会を退会する", user_path(@user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %></button>
+<button><%= link_to "理事会を退会する", unsubscribe_path(@user.id) %></button>
 <button><%= link_to "理事一覧へ", users_path %></button>

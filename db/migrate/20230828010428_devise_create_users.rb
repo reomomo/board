@@ -10,6 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :first_name, null: false
       t.string :keyword, inclusion: { in: ["Management association 第3期"] }
       t.integer :is_participated, null: false, default: 0
+      t.boolean :is_deleted, default: false
 
       ## Recoverable
       t.string   :reset_password_token

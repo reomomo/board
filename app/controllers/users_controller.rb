@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+  before_action :is_matching_login_user, only: [:edit, :update, :unsubscribe, :withdrawal]
 
+  # 掲示物作成画面での参加・不参加の変更時の処理
   def change
     @user = User.find(params[:id])
     @user.email = @user.email
@@ -40,12 +41,26 @@ class UsersController < ApplicationController
     redirect_to user_path(@user.id)
   end
 
-  def destroy
-    user = User.find(params[:id])
-    user.destroy
+  # 退会確認画面
+  def unsubscribe
+    @user = User.find(params[:id])
+  end
+
+  # 退会の論理削除
+  def withdrawal
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
     reset_session
+    flash[:withdrawal_notice] = "理事会を退会しました"
     redirect_to root_path
   end
+
+  # def destroy
+  #   user = User.find(params[:id])
+  #   user.destroy
+  #   reset_session
+  #   redirect_to root_path
+  # end
 
   private
 
@@ -56,7 +71,7 @@ class UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      flash[:user_notice] = "理事情報の編集・削除は本人のみ可能です"
+      flash[:user_notice] = "理事情報の編集・退会処理は本人のみ可能です"
       redirect_to user_path(user.id)
     end
   end

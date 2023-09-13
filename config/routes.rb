@@ -7,8 +7,13 @@ Rails.application.routes.draw do
   resources :public_relations
   resources :categories, except: [:new, :show]
   resources :topics, except: [:index, :show]
-  resources :users, except: [:new, :create]
+  resources :users, except: [:new, :create, :destroy]
+  # 掲示物作成画面での参加・不参加の変更時の処理
   patch '/user/change/:id' => 'users#change', as:'change_user'
+  # 退会確認画面
+  get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  # 退会の論理削除
+  patch '/users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
   resources :groups, except: [:new]
   post "/group_users/add_group" => "group_users#add_group", as: 'add_group'
   post "/group_users/add_user" => "group_users#add_user", as: 'add_user'
