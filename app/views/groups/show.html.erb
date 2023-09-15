@@ -5,6 +5,9 @@
 <% if @group_users %>
   <% @group_users.each do |group_user| %>
     <%= group_user.user.full_name %>
+    <% if group_user.user.is_deleted == true %>
+      (理事退会済)
+    <% end %>
     <%= link_to "グループ退会", destroy_user_path(group_user.id), method: :delete, "data-confirm" => "グループを退会しますか？" %>
   <% end %>
 <% else %>
@@ -17,6 +20,9 @@
   <h5>グループへ追加する方を選択してください</h5>
   <% @users_ary.each do |user| %>
     <%= user.full_name %>
+    <% if user.is_deleted == true %>
+      (理事退会済)
+    <% end %>
     <%= form_with model: @gourp_user, url: add_user_path, method: :post do |f| %>
       <%= f.hidden_field :group_id, :value => @group.id %>
       <%= f.hidden_field :user_id, :value => user.id %>

@@ -1,4 +1,4 @@
-<h1>新規 投票作成</h1>
+<h1>新規 アンケート作成</h1>
 
 <% if @vote.errors.any? %>
   <%= @vote.errors.count %>件のエラーが発生しました
@@ -20,6 +20,9 @@
   <%= f.text_field :choice_2 %>
   <%= f.text_field :choice_3 %>
   <%= f.text_field :choice_4 %>
+
+  <h4>対象者</h4>
+  <%= f.select :group_id, options_from_collection_for_select(Group.all, :id, :name) %>
 
   <%= f.submit "登録" %>
 <% end %>

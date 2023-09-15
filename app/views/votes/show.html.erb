@@ -15,6 +15,9 @@
   <h4>タイトル</h4>
   <%= @vote.title %>
 
+  <h4>対象グループ</h4>
+  <%= @vote.group.name %>
+
   <h4>質問（2～200文字）</h4>
   <%= @vote.question %>
   <h4>選択肢（1～50文字）</h4>
@@ -60,7 +63,7 @@
     graph_4.style.width = answer_4 * 20 + "px";
   </script>
 
-<% else %>
+<% elsif current_user.group_users.find_by(group_id: @vote.group_id) %>
   <h1>アンケートにご協力ください。</h1>
 
   <h4>回答状況</h4>
@@ -70,6 +73,9 @@
 
   <h4>タイトル</h4>
   <%= @vote.title %>
+
+  <h4>対象グループ</h4>
+  <%= @vote.group.name %>
 
   <h4>質問（2～200文字）</h4>
   <%= @vote.question %>
@@ -122,6 +128,8 @@
       graph_4.style.width = answer_4 * 20 + "px";
     }
   </script>
+<% else %>
+  このアンケートは「<%= @vote.group.name %>」参加者のみ対象です
 <% end %>
 
 <button><%= link_to "アンケート一覧へ", votes_path %></button>

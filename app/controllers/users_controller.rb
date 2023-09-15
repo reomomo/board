@@ -13,7 +13,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.where(is_deleted: false)
+    @deleted_users = User.where(is_deleted: true)
   end
 
   def show

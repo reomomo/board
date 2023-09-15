@@ -5,6 +5,8 @@
   <%= f.datetime_field :date %>
   <h4>タイトル</h4>
   <%= f.text_field :title %>
+  <h4>対象グループ</h4>
+  <%= f.select :group_id, options_from_collection_for_select(Group.all, :id, :name) %>
   <%= f.submit "次へ進む" %>
 <% end %>
 

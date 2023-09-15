@@ -2,6 +2,12 @@
 <%= flash[:user_notice] %>
 
 <%= @user.email %>
+<% if @user.is_deleted == false %>
+  理事就任中
+<% else %>
+  理事退任済
+<% end %>
+
 <h5>参加しているグループ</h5>
 <% unless @group_users.empty? %>
   <% @group_users.each do |group_user| %>
@@ -33,5 +39,7 @@
 <% end %>
 
 <button><%= link_to "理事情報を編集する", edit_user_path(@user.id) %></button>
-<button><%= link_to "理事会を退会する", unsubscribe_path(@user.id) %></button>
+<% if @user.is_deleted == false %>
+  <button><%= link_to "理事会を退会する", unsubscribe_path(@user.id) %></button>
+<% end %>
 <button><%= link_to "理事一覧へ", users_path %></button>

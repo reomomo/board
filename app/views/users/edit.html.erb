@@ -10,5 +10,7 @@
 <% end %>
 
 <button><%= link_to "理事登録状況へ戻る", user_path(@user.id) %></button>
-<button><%= link_to "理事会を退会する", unsubscribe_path(@user.id) %></button>
+<% if @user.is_deleted == false %>
+  <button><%= link_to "理事会を退会する", unsubscribe_path(@user.id) %></button>
+<% end %>
 <button><%= link_to "理事一覧へ", users_path %></button>

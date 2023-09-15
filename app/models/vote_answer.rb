@@ -3,5 +3,4 @@ class VoteAnswer < ApplicationRecord
   belongs_to :vote
 
   validates :answer, presence: true
-  validates :email, presence: true
 end

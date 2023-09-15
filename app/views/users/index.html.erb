@@ -1,4 +1,4 @@
-<h1>理事一覧</h1>（敬称略）
+<h1>就任中の理事一覧</h1>（敬称略）
 
 <% @users.each do |user| %>
   <%= user.full_name %>：
@@ -9,8 +9,26 @@
   <% else %>
     参加しているグループはありません
   <% end %>
-  <%= link_to "理事登録状況", user_path(user.id) %>
+  <button><%= link_to "理事登録状況", user_path(user.id) %></button>
   <button><%= link_to "理事情報を編集する", edit_user_path(user.id) %></button>
-  <button><%= link_to "理事会を退会する", unsubscribe_path(user.id) %></button>
+  <button><%= link_to "理事会を退会する", unsubscribe_path(user.id) %></button></br>
+
+<% end %>
+
+
+<h1>退任済の理事一覧</h1>（敬称略）
+
+<% @deleted_users.each do |user| %>
+  <%= user.full_name %>：
+  <% if user.group_users.present? %>
+    参加中のグループ：
+    <% user.group_users.each_with_index do |g_user, index| %>
+        <%= g_user.group.name %>
+    <% end %>
+  <% else %>
+    参加しているグループはありません
+  <% end %>
+  <button><%= link_to "理事登録状況", user_path(user.id) %></button>
+  <button><%= link_to "理事情報を編集する", edit_user_path(user.id) %></button></br>
 
 <% end %>
