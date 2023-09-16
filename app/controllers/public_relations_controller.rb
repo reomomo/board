@@ -1,13 +1,14 @@
 class PublicRelationsController < ApplicationController
   def new
     @public_relation = PublicRelation.new
+    @major_item = MajorItem.new
   end
 
   def create
     @public_relation = PublicRelation.new(public_relation_params)
     @public_relation.user_id = current_user.id
     @public_relation.save
-    redirect_to public_relation_path(@public_relation.id)
+    redirect_to new_major_item_path
   end
 
   def index

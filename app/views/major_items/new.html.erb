@@ -1,0 +1,5 @@
+  <%= form_with model: @major_item, url: major_items_path, method: :post do |f| %>
+    <%= f.text_field :title %>
+    
+    <%= f.submit "登録" %>
+  <% end %>

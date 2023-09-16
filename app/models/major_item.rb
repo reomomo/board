@@ -1,0 +1,2 @@
+class MajorItem < ApplicationRecord
+end

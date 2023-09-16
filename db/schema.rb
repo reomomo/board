@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_30_235002) do
+ActiveRecord::Schema.define(version: 2023_09_15_233553) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", limit: 50, null: false
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 2023_08_30_235002) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name", limit: 50, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "major_items", force: :cascade do |t|
+    t.integer "public_relation_id", null: false
+    t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
