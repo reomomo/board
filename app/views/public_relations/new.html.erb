@@ -9,36 +9,3 @@
   <%= f.select :group_id, options_from_collection_for_select(Group.all, :id, :name) %>
   <%= f.submit "次へ進む", pr_memo_id: @public_relation.id %>
 <% end %>
-
-
-  <!--
-  <span id="span1"></span>
-  <form action="/public_relations/new" method="post">
-  <input type="number" name="user_input" id="number_2" value="1" max="10" />
-  <input type="button" value="追加" onclick="clickBtn()" />
-  </form>
-
-
-
-
-<script>
-  function clickBtn() {
-    const number = document.getElementById("number_2");
-    const valueNumber= number.value;
-    console.log(valueNumber);
-
-    // $.ajax({
-    //   url: "/public_relations/new",
-    //   method: "POST",
-    //   data: { value: valueNumber },
-    //   success: function(response) {
-    //     alert("成功")
-    //   },
-    //   error: function(error) {
-    //     alert("エラーです")
-    //   }
-    // });
-  }
-</script>
-
--->
