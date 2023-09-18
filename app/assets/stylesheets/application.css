@@ -31,3 +31,45 @@
 .graph {
   height: 20px;
 }
+
+/*掲示物作成画面をタブメニューで表示*/
+.wrap {
+  width: 98%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0;
+}
+#tab-menu {
+  display: flex;
+}
+#tab-menu li {
+  list-style-type: none;
+  width: 25%;
+  position: relative;
+  top: 1px;
+}
+#tab-menu li a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  padding: 20px 0;
+  text-align: center;
+  background: #E9B4D0;
+  border: 1px solid #E9B4D0;
+  border-bottom: none;
+}
+#tab-menu .active {
+  background: #fff;
+  color: #000;
+  border-bottom: none;
+}
+#tab-contents {
+  display: flex;
+  flex-wrap: wrap;
+}
+#tab-contents .tab {
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #E9B4D0;
+}

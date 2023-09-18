@@ -1,59 +1,94 @@
 <h1>掲示物作成</h1>
-<h3>タイトル</h3>
-<%= @public_relation.title %>
-<h3>日時</h3>
-<%= format_time(@public_relation.date) %>
-<%= link_to "タイトル・日時の編集", edit_public_relation_path(@public_relation.id) %></br>
-<% @categories.each do |category, index_c| %>
-  <h3><%= category.name %></h3>
-  <%= link_to "追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></br>
-  <% if @topics.find_by(category_id: category.id) %>
-    <% @topics.where(category_id: category.id).each do |topic, index_t| %>
-      <%= topic.name %>
-      <%= link_to "編集", edit_topic_path(topic.id) %></br>
-      <%= link_to "削除", topic_path(topic.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-    <% end %>
-  <% end %>
-<% end %>
-<h3>出席者編集（敬称略）</h3>
-<table>
-  <% @users.each do |user| %>
-  <tr>
-    <td><%= user.full_name %></td>
-    <%= form_with model: user, url: change_user_path(user.id), method: :patch do |f| %>
-    <td>
-      <%= f.select :is_participated, options_for_select(User.is_participateds_i18n.invert, { :selected => user.is_participated }) %>
-    </td>
-    <%= hidden_field_tag :memo_id, @public_relation.id %>
-    <td><%= f.submit "変更" %></td>
-    <% end %>
-  </tr>
-  <% end %>
-</table>
 
-<!--掲示物としてのデザイン-->
-<h2><%= @public_relation.title %></h2>
-<strong>日時</strong><%= format_time(@public_relation.date) %></br>
-<strong>出席者（敬称略）</strong>
-<% @users.each do |user| %>
-  <% unless user.is_participated == User.is_participateds.key(0) %>
-    <%= user.full_name %> : <%= user.is_participated_i18n %>
-  <% end %>
-<% end %>
-【議題】</br>
-<% @categories.each_with_index do |category, index_c| %>
-  <%= index_c + 1 %>. <%= category.name %></br>
-  <% if @topics.find_by(category_id: category.id) %>
-    <% @topics.where(category_id: category.id).each_with_index do |topic, index_t| %>
-      <li>
-        （<%= index_t + 1 %>）<%= topic.name %>
-        <%= topic.body %>
-      </li>
-    <% end %>
-  <% else %>
-    <li>
-      なし
-    </li>
-  <% end %>
-<% end %>
+<div class="wrap">
+  <ul id="tab-menu">
+    <li><a href="#tab1" class="active">理事会議事録</a></li>
+    <li><a href="#tab2">イベント掲示</a></li>
+    <li><a href="#tab3">その他</a></li>
+  </ul>
+  <div id="tab-contents">
+    <div id="tab1" class="tab">
+      <h3>タイトル</h3>
+      <%= @public_relation.title %>
+      <h3>日時</h3>
+      <%= format_time(@public_relation.date) %>
+      <%= link_to "タイトル・日時の編集", edit_public_relation_path(@public_relation.id) %></br>
+      <% @categories.each do |category, index_c| %>
+        <h3><%= category.name %></h3>
+        <%= link_to "追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></br>
+        <% if @topics.find_by(category_id: category.id) %>
+          <% @topics.where(category_id: category.id).each do |topic, index_t| %>
+            <%= topic.name %>
+            <%= link_to "編集", edit_topic_path(topic.id) %></br>
+            <%= link_to "削除", topic_path(topic.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <h3>出席者編集（敬称略）</h3>
+      <table>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.full_name %></td>
+          <%= form_with model: user, url: change_user_path(user.id), method: :patch do |f| %>
+          <td>
+            <%= f.select :is_participated, options_for_select(User.is_participateds_i18n.invert, { :selected => user.is_participated }) %>
+          </td>
+          <%= hidden_field_tag :memo_id, @public_relation.id %>
+          <td><%= f.submit "変更" %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </table>
 
+      <!--掲示物としてのデザイン-->
+      <h2><%= @public_relation.title %></h2>
+      <strong>日時</strong><%= format_time(@public_relation.date) %></br>
+      <strong>出席者（敬称略）</strong>
+      <% @users.each do |user| %>
+        <% unless user.is_participated == User.is_participateds.key(0) %>
+          <%= user.full_name %> : <%= user.is_participated_i18n %>
+        <% end %>
+      <% end %>
+      【議題】</br>
+      <% @categories.each_with_index do |category, index_c| %>
+        <%= index_c + 1 %>. <%= category.name %></br>
+        <% if @topics.find_by(category_id: category.id) %>
+          <% @topics.where(category_id: category.id).each_with_index do |topic, index_t| %>
+            <li>
+              （<%= index_t + 1 %>）<%= topic.name %>
+              <%= topic.body %>
+            </li>
+          <% end %>
+        <% else %>
+          <li>
+            なし
+          </li>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!--イベント掲示-->
+    <div id="tab2" class="tab hide">
+      <h2><%= @public_relation.title %></h2>
+      <h3>開催日</h3>
+      <%= format_time(@public_relation.date) %>
+      <%= link_to "タイトル・日時の編集", edit_public_relation_path(@public_relation.id) %></br>
+      <% @categories.each do |category, index_c| %>
+        <h3><%= category.name %></h3>
+        <%= link_to "追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></br>
+        <% if @topics.find_by(category_id: category.id) %>
+          <% @topics.where(category_id: category.id).each do |topic, index_t| %>
+            <%= topic.name %>
+            <%= link_to "編集", edit_topic_path(topic.id) %></br>
+            <%= link_to "削除", topic_path(topic.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!--その他-->
+    <div id="tab3" class="tab hide">
+      その他
+    </div>
+  </div>
+</div>

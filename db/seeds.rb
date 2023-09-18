@@ -140,6 +140,10 @@ Category.create!(
       name: "報告事項"
     },{
       name: "その他"
+    },{
+      name: "イベント詳細"
+    },{
+      name: "その他"
     }
   ]
 )
