@@ -7,8 +7,10 @@ class PublicRelationsController < ApplicationController
   def create
     @public_relation = PublicRelation.new(public_relation_params)
     @public_relation.user_id = current_user.id
-    @public_relation.save
-    redirect_to new_major_item_path
+    if @public_relation.save
+      session[:pr_memo_id] = @public_relation.id
+      redirect_to new_major_item_path
+    end
   end
 
   def index

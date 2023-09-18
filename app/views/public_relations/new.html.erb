@@ -7,5 +7,5 @@
   <%= f.text_field :title %>
   <h4>対象グループ</h4>
   <%= f.select :group_id, options_from_collection_for_select(Group.all, :id, :name) %>
-  <%= f.submit "次へ進む", pr_memo_id: @public_relation.id %>
+  <%= f.submit "次へ進む" %>
 <% end %>

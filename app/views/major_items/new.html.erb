@@ -1,5 +1,5 @@
   <%= form_with model: @major_item, url: major_items_path, method: :post do |f| %>
     <%= f.text_field :title %>
-    
+    <%= f.hidden_field :public_relation_id, :value => @memo_id %>
     <%= f.submit "登録" %>
   <% end %>
