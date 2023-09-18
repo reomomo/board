@@ -40,16 +40,25 @@
         <% end %>
       </table>
 
+      <%= link_to "項目を新しく作る", new_category_path %>
+      <% @categories.each do |category| %>
+        <%= category.name %>
+      <% end %>
+
       <!--掲示物としてのデザイン-->
       <h2><%= @public_relation.title %></h2>
       <strong>日時</strong><%= format_time(@public_relation.date) %></br>
       <strong>出席者（敬称略）</strong>
+      <% count = 0%>
       <% @users.each do |user| %>
         <% unless user.is_participated == User.is_participateds.key(0) %>
           <%= user.full_name %> : <%= user.is_participated_i18n %>
         <% end %>
+        <% count += 1 if user.is_participated == User.is_participateds.key(1) %></br>
       <% end %>
+      出席者合計：<%= count %>名
       【議題】</br>
+
       <% @categories.each_with_index do |category, index_c| %>
         <%= index_c + 1 %>. <%= category.name %></br>
         <% if @topics.find_by(category_id: category.id) %>

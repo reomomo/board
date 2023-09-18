@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
 
+  # 新規作成は一覧画面に入っている
   def create
     @group = Group.new(group_params)
     @group.save
@@ -38,47 +39,30 @@ class GroupsController < ApplicationController
     group = Group.find(params[:id])
     public_relations = PublicRelation.where(group_id: group.id)
     votes = Vote.where(group_id: group.id)
+    categories = Category.where(group_id: group.id)
     group_other = Group.find_by(name: "その他")
     if group_other.present?
       public_relations.each do |pr|
-        pr.user_id = pr.user_id
-        pr.title = pr.title
-        pr.date = pr.date
-        pr.group_id = group_other.id
-        pr.update
+        pr.update(group_id: group_other.id)
       end
       votes.each do |vote|
-        vote.user_id = vote.user_id
-        vote.title = vote.title
-        vote.question = vote.question
-        vote.choice_1 = vote.choice_1
-        vote.choice_2 = vote.choice_2
-        vote.choice_3 = vote.choice_3
-        vote.choice_4 = vote.choice_4
-        vote.group_id = group_other.id
-        vote.update
+        vote.update(group_id: group_other.id)
+      end
+      categories.each do |category|
+        category.update(group_id: group_other.id)
       end
     else
       @group = Group.new
       @group.name = "その他"
       @group.save
       public_relations.each do |pr|
-        pr.user_id = pr.user_id
-        pr.title = pr.title
-        pr.date = pr.date
-        pr.group_id = @group.id
-        pr.update
+        pr.update(group_id: @group.id)
       end
       votes.each do |vote|
-        vote.user_id = vote.user_id
-        vote.title = vote.title
-        vote.question = vote.question
-        vote.choice_1 = vote.choice_1
-        vote.choice_2 = vote.choice_2
-        vote.choice_3 = vote.choice_3
-        vote.choice_4 = vote.choice_4
-        vote.group_id = @group.id
-        vote.update
+        vote.update(group_id: @group.id)
+      end
+      categories.each do |category|
+        category.update(group_id: @group.id)
       end
     end
     group.destroy

@@ -4,10 +4,6 @@ class UsersController < ApplicationController
   # 掲示物作成画面での参加・不参加の変更時の処理
   def change
     @user = User.find(params[:id])
-    @user.email = @user.email
-    @user.last_name = @user.last_name
-    @user.first_name = @user.first_name
-    @user.keyword = @user.keyword
     @user.update(user_params)
     redirect_to public_relation_path(params[:memo_id])
   end

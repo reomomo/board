@@ -1,27 +1,28 @@
 グループ名変更画面へ
 <%= render 'group', groups: @groups %>
+<%= link_to "グループ一覧", groups_path %>
 
 <h1>掲示物一覧</h1>
 
 
 <h3>確認したい掲示物のグループを選択してください</h3>
 <%= link_to "すべて", public_relations_path(group_key: 0) %>
-<% @groups.each.with_index(1) do |group, index| %>
-  <%= link_to group.name, public_relations_path(group_key: index) %>
+<% @groups.each do |group| %>
+  <%= link_to group.name, public_relations_path(group_key: group.id) %>
 <% end %>
 
 <% if @key == 0 %>
    <% @public_relations.each do |pr| %>
     <h3><%= pr.title %></h3>
-    理事会日時
+    開催日時
     <%= format_time(pr.date) %>
     <%= link_to "詳細", public_relation_path(pr.id) %>
   <% end %>
 <% elsif @key > 0 %>
-  <% @groups.each.with_index(1) do |group, index| %>
+  <% @groups.each do |group| %>
     <% group.public_relations.where(group_id: @key).each do |pr| %>
       <h3><%= pr.title %></h3>
-      理事会日時
+      開催日時
       <%= format_time(pr.date) %>
       <%= link_to "詳細", public_relation_path(pr.id) %>
     <% end %>

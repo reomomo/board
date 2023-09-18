@@ -1,6 +1,12 @@
 class CategoriesController < ApplicationController
-  def create
+  def new
+    @category = Category.new
+  end
 
+  def create
+    @category = Category.new(category_params)
+    @category.save
+    redirect_to categories_path
   end
 
   def index
@@ -18,7 +24,7 @@ class CategoriesController < ApplicationController
 
   private
 
-  def topic_params
-    params.require(:category).permit(:name)
+  def category_params
+    params.require(:category).permit(:group_id, :name)
   end
 end

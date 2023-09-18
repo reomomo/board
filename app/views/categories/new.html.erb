@@ -1,0 +1,5 @@
+  <%= form_with model: @category do |f| %>
+    <%= f.text_field :name %>
+    <%= f.select :group_id, options_from_collection_for_select(Group.all, :id, :name) %>
+    <%= f.submit "登録" %>
+  <% end %>

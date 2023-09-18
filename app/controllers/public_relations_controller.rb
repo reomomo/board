@@ -3,7 +3,7 @@ class PublicRelationsController < ApplicationController
 
   def new
     @public_relation = PublicRelation.new
-    @major_item = MajorItem.new
+    @category = Category.new
   end
 
   def create
@@ -11,7 +11,7 @@ class PublicRelationsController < ApplicationController
     @public_relation.user_id = current_user.id
     if @public_relation.save
       session[:pr_memo_id] = @public_relation.id
-      redirect_to new_major_item_path
+      redirect_to public_relation_path(@public_relation.id)
     end
   end
 
