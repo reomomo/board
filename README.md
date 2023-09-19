@@ -1,24 +1,29 @@
-# README
+# 掲示物、アンケート簡単作成サイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+掲示物の作成やグループ内での意見確認用のアンケートを簡単に作成できるサイト
 
-Things you may want to cover:
+### テーマを選んだ理由
+理事会などのグループの中でパソコンでの資料作成が苦手な方も多いと思います。
+得意な方に任せることができない状況でもグループでの活動に支障が出ないよう、広報資料の作成やアンケート集計などが簡単にできるアプリケーションを作成したいと思いました。
+PTAやサークル活動、お子様の部活動のサポートなどにもぜひ役立てていただけると嬉しいと思っています。
 
-* Ruby version
 
-* System dependencies
+### ターゲットユーザー
+* マンションなどの広報担当の方
+* イベント行事の掲示物を作成したい方
+* グループ間での意見確認の為、アンケートを作りたい方
+* その他、PTAやサークル、お子様の部活動などの広報資料の作成にも
 
-* Configuration
+### 主な利用シーン
+* 理事会の議事録の作成
+* 理事会からの通知文書の作成
+* イベント行事の案内文書の作成
+* 理事会内での意見確認をする際のアンケート作成
+* その他、PTAやサークル、お子様の部活動など各グループの広報資料作成
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 開発環境
+* 言語：HTML,CSS,JavaScript,Ruby,SQL
+* フレームワーク：Ruby on Rails
+* IDE：Cloud9
