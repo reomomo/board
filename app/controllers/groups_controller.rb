@@ -41,6 +41,7 @@ class GroupsController < ApplicationController
     votes = Vote.where(group_id: group.id)
     categories = Category.where(group_id: group.id)
     group_other = Group.find_by(name: "その他")
+    # 削除時に「グループ：その他」があれば、アソシエーション関係のあるモデルのgroup_idを「その他」のidに変更
     if group_other.present?
       public_relations.each do |pr|
         pr.update(group_id: group_other.id)
@@ -51,6 +52,7 @@ class GroupsController < ApplicationController
       categories.each do |category|
         category.update(group_id: group_other.id)
       end
+    # 削除時に「グループ：その他」が無ければ作成し、アソシエーション関係のあるモデルのgroup_idを「その他」のidに変更
     else
       @group = Group.new
       @group.name = "その他"
@@ -67,8 +69,6 @@ class GroupsController < ApplicationController
     end
     group.destroy
     redirect_to groups_path
-    # 削除したらグループ：その他へ移動
-    # グループ：その他をどう扱うか
   end
 
   private

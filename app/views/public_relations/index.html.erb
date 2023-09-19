@@ -1,4 +1,4 @@
-グループ名変更画面へ
+それぞれのグループの在籍者の確認ができます
 <%= render 'group', groups: @groups %>
 <%= link_to "グループ一覧", groups_path %>
 
@@ -11,6 +11,7 @@
   <%= link_to group.name, public_relations_path(group_key: group.id) %>
 <% end %>
 
+<!--グループごとの表示に切り替える為のリンク-->
 <% if @key == 0 %>
    <% @public_relations.each do |pr| %>
     <h3><%= pr.title %></h3>

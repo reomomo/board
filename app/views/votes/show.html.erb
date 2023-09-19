@@ -27,7 +27,7 @@
   <%= @vote.choice_4 %>
 
   <h4><%= @user.last_name %>さんの回答</h4>
-  <%= @user.vote_answers.find_by(vote_id: @vote.id).answer %>
+  <%= @user_vote_answer.answer %>
 
   <h4>現在の集計状況</h4>
   <table>

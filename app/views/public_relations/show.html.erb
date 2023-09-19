@@ -7,19 +7,18 @@
     <li><a href="#tab3">その他</a></li>
   </ul>
   <div id="tab-contents">
+
+    <!--理事会議事録-->
     <div id="tab1" class="tab">
-      <h3>タイトル</h3>
-      <%= @public_relation.title %>
-      <h3>日時</h3>
-      <%= format_time(@public_relation.date) %>
       <%= link_to "タイトル・日時の編集", edit_public_relation_path(@public_relation.id) %></br>
-      <% @categories.each do |category, index_c| %>
-        <h3><%= category.name %></h3>
-        <%= link_to "追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></br>
+      <%= link_to "大項目を新しく作る", new_category_path %>
+      <% @categories.each do |category| %>
+        <h3>大項目：<%= category.name %></h3>
+        <%= link_to "中項目と詳細内容の追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></br>
         <% if @topics.find_by(category_id: category.id) %>
-          <% @topics.where(category_id: category.id).each do |topic, index_t| %>
-            <%= topic.name %>
-            <%= link_to "編集", edit_topic_path(topic.id) %></br>
+          <% @topics.where(category_id: category.id).each do |topic| %>
+            中項目：<%= topic.name %>
+            <%= link_to "編集", edit_topic_path(topic.id) %>
             <%= link_to "削除", topic_path(topic.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
           <% end %>
         <% end %>
@@ -39,11 +38,6 @@
         </tr>
         <% end %>
       </table>
-
-      <%= link_to "項目を新しく作る", new_category_path %>
-      <% @categories.each do |category| %>
-        <%= category.name %>
-      <% end %>
 
       <!--掲示物としてのデザイン-->
       <h2><%= @public_relation.title %></h2>
@@ -78,19 +72,37 @@
 
     <!--イベント掲示-->
     <div id="tab2" class="tab hide">
-      <h2><%= @public_relation.title %></h2>
-      <h3>開催日</h3>
-      <%= format_time(@public_relation.date) %>
       <%= link_to "タイトル・日時の編集", edit_public_relation_path(@public_relation.id) %></br>
-      <% @categories.each do |category, index_c| %>
-        <h3><%= category.name %></h3>
-        <%= link_to "追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></br>
+      <h3>大項目</h3>
+      <% @categories.each do |category| %>
+        <%= category.name %>
+        <h3><%= link_to "中項目の追加", new_topic_path(category_id: category.id, public_relation_id: @public_relation.id) %></h3>
         <% if @topics.find_by(category_id: category.id) %>
-          <% @topics.where(category_id: category.id).each do |topic, index_t| %>
+          <% @topics.where(category_id: category.id).each do |topic| %>
             <%= topic.name %>
-            <%= link_to "編集", edit_topic_path(topic.id) %></br>
+            <%= link_to "編集", edit_topic_path(topic.id) %>
             <%= link_to "削除", topic_path(topic.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
           <% end %>
+        <% end %>
+      <% end %>
+
+      <!--掲示物としてのデザイン-->
+      <h2><%= @public_relation.title %></h2>
+      <strong>日時</strong><%= format_time(@public_relation.date) %></br>
+
+      <% @categories.each do |category| %>
+        <%= category.name %></br>
+        <% if @topics.find_by(category_id: category.id) %>
+          <% @topics.where(category_id: category.id).each do |topic| %>
+            <li>
+              <%= topic.name %></br>
+              <%= topic.body %>
+            </li>
+          <% end %>
+        <% else %>
+          <li>
+            なし
+          </li>
         <% end %>
       <% end %>
     </div>

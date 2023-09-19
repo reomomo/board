@@ -1,4 +1,6 @@
 class VoteAnswersController < ApplicationController
+  
+  # newアクションはvote/showにある
   def create
     @vote_answer = VoteAnswer.new(vote_answer_params)
     @vote_answer.user_id = current_user.id

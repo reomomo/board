@@ -24,9 +24,9 @@ class PublicRelationsController < ApplicationController
   def show
     @public_relation = PublicRelation.find(params[:id])
     @users = User.all
-    @categories = Category.all
+    # 同じグループidのカテゴリーのみ
+    @categories = Category.where(group_id: @public_relation.group.id)
     @topics = @public_relation.topics.all
-    @topic = @public_relation.topics.where()
   end
 
   def edit
