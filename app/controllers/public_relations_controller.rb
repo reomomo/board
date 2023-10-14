@@ -30,13 +30,16 @@ class PublicRelationsController < ApplicationController
   end
 
   def edit
-    @public_relation = PublicRelation.find(params[:id])
   end
 
   def update
-    @public_relation = PublicRelation.find(params[:id])
     @public_relation.update(public_relation_params)
     redirect_to public_relation_path(@public_relation.id)
+  end
+
+  def destroy
+    @public_relation.destroy
+    redirect_to public_relations_path
   end
 
   private
@@ -49,7 +52,7 @@ class PublicRelationsController < ApplicationController
     @public_relation = PublicRelation.find(params[:id])
     unless @public_relation.user_id == current_user.id
       flash[:public_relation_notice] = "広報資料の編集・削除は資料作成者のみ可能です"
-      redirect_to vote_path(@public_relation.id)
+      redirect_to public_relation_path(@public_relation.id)
     end
   end
 end

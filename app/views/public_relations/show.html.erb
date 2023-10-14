@@ -1,5 +1,8 @@
 <h1>掲示物作成</h1>
 
+<%= flash[:public_relation_notice] %>
+<%= link_to "掲示物の削除", public_relation_path(@public_relation.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
 <div class="wrap">
   <ul id="tab-menu">
     <li><a href="#tab1" class="active">理事会議事録</a></li>
